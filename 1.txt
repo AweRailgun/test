@@ -3357,20 +3357,6 @@
 
     invoke-interface {v0, v4}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
-    .line 428
-    invoke-static {}, Lcn/kuwo/ui/video/VideoTabFragment;->getInstance()Lcn/kuwo/ui/video/VideoTabFragment;
-
-    move-result-object v4
-
-    invoke-interface {v0, v4}, Ljava/util/List;->add(Ljava/lang/Object;)Z
-
-    .line 430
-    new-instance v4, Lcn/kuwo/ui/fragment/LiveTabFragment;
-
-    invoke-direct {v4}, Lcn/kuwo/ui/fragment/LiveTabFragment;-><init>()V
-
-    invoke-interface {v0, v4}, Ljava/util/List;->add(Ljava/lang/Object;)Z
-
     .line 431
     new-instance v4, Lcn/kuwo/ui/fragment/MineTabFragment;
 
@@ -3401,7 +3387,7 @@
     .line 435
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mViewPager:Lcn/kuwo/ui/common/NoScrollViewPager;
 
-    const/4 v4, 0x5
+    const/4 v4, 0x2
 
     invoke-virtual {v0, v4}, Lcn/kuwo/ui/common/NoScrollViewPager;->setOffscreenPageLimit(I)V
 
@@ -3497,36 +3483,6 @@
 
     move-result-object v0
 
-    const v1, 0x7f0823bc
-
-    const v4, 0x7f0823bd
-
-    const-string/jumbo v5, "视频"
-
-    .line 444
-    invoke-direct {p0, v5, v1, v4}, Lcn/kuwo/ui/fragment/MainController;->newTab(Ljava/lang/String;II)Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabItemView;
-
-    move-result-object v1
-
-    invoke-virtual {v0, v1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout$BottomTabAdapter;->addTab(Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabItemView;)Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout$BottomTabAdapter;
-
-    move-result-object v0
-
-    const v1, 0x7f0823b5
-
-    const v4, 0x7f0823b6
-
-    const-string/jumbo v5, "直播"
-
-    .line 446
-    invoke-direct {p0, v5, v1, v4}, Lcn/kuwo/ui/fragment/MainController;->newTab(Ljava/lang/String;II)Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabItemView;
-
-    move-result-object v1
-
-    invoke-virtual {v0, v1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout$BottomTabAdapter;->addTab(Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabItemView;)Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout$BottomTabAdapter;
-
-    move-result-object v0
-
     const v1, 0x7f0823b7
 
     const v4, 0x7f0823b8
@@ -3551,15 +3507,6 @@
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mViewPager:Lcn/kuwo/ui/common/NoScrollViewPager;
 
     invoke-virtual {v0, v1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->bindViewPage(Landroidx/viewpager/widget/ViewPager;)V
-
-    .line 450
-    iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
-
-    new-instance v1, Lcn/kuwo/ui/fragment/MainController$TabSelectedListener;
-
-    invoke-direct {v1, p0, v2}, Lcn/kuwo/ui/fragment/MainController$TabSelectedListener;-><init>(Lcn/kuwo/ui/fragment/MainController;Lcn/kuwo/ui/fragment/MainController$1;)V
-
-    invoke-virtual {v0, v1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->addOnTabSelectedListener(Lcn/kuwo/ui/widget/bottomTabLayout/OnTabSelectedListener;)V
 
     .line 451
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
@@ -3595,7 +3542,7 @@
 
     move-result v0
 
-    if-gtz v0, :cond_179
+    if-gtz v0, :cond_13e
 
     .line 457
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mTabRedTipManager:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabRedTipManager;
@@ -3609,49 +3556,49 @@
     sput-boolean v3, Lcn/kuwo/show/base/constants/LiveTabRedNumConstant;->IS_SHOW_LIVE_TAB_SHOW_REPORT:Z
 
     .line 461
-    :cond_179
+    :cond_13e
     sget v0, Lcn/kuwo/ui/fragment/MainController;->tabIndex:I
 
-    if-ltz v0, :cond_183
+    if-ltz v0, :cond_148
 
     .line 462
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
     invoke-virtual {v1, v0}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->setSelected(I)V
 
-    goto :goto_19d
+    goto :goto_162
 
     .line 464
-    :cond_183
+    :cond_148
     invoke-static {}, Lcn/kuwo/base/utils/NetworkStateUtil;->l()Z
 
     move-result v0
 
-    if-nez v0, :cond_193
+    if-nez v0, :cond_158
 
     invoke-static {}, Lcn/kuwo/base/utils/NetworkStateUtil;->a()Z
 
     move-result v0
 
-    if-nez v0, :cond_190
+    if-nez v0, :cond_155
 
-    goto :goto_193
+    goto :goto_158
 
     .line 467
-    :cond_190
+    :cond_155
     sput v3, Lcn/kuwo/ui/fragment/MainController;->tabIndex:I
 
-    goto :goto_196
+    goto :goto_15b
 
-    :cond_193
-    :goto_193
+    :cond_158
+    :goto_158
     const/4 v0, 0x3
 
     .line 465
     sput v0, Lcn/kuwo/ui/fragment/MainController;->tabIndex:I
 
     .line 469
-    :goto_196
+    :goto_15b
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
     sget v1, Lcn/kuwo/ui/fragment/MainController;->tabIndex:I
@@ -3659,7 +3606,7 @@
     invoke-virtual {v0, v1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->setSelected(I)V
 
     .line 471
-    :goto_19d
+    :goto_162
     invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->adjustBottomHeight()V
 
     .line 472
