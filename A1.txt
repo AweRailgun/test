@@ -16,19 +16,9 @@
 # static fields
 .field public static final HOME:I = 0x0
 
-.field public static final LIVE:I = 0x3
+.field public static final LIVE:I = 0x2
 
-.field public static final MINE:I = 0x4
-
-.field public static final SCENE:I = 0x2
-
-.field public static final SCENE_NAME:Ljava/lang/String; = "ing"
-
-.field public static final STATE_DARK_MODE:I = 0x1
-
-.field public static final STATE_NORMAL:I = 0x0
-
-.field public static final STATE_SCENE_MODE:I = 0x2
+.field public static final MINE:I = 0x3
 
 .field private static final TAG:Ljava/lang/String; = "MainController"
 
@@ -40,9 +30,11 @@
 # instance fields
 .field private bActive:Z
 
-.field private blueObserver:Lcn/kuwo/core/observers/IBlueToothStateObserver;
+.field private bTouchPlayControlPanel:Z
 
-.field private carPopObserver:Lcn/kuwo/core/observers/IBlueToothCarPopObserver;
+.field private blueObserver:Lcn/kuwo/core/observers/y;
+
+.field private carPopObserver:Lcn/kuwo/core/observers/x;
 
 .field private carView:Landroid/view/View;
 
@@ -64,17 +56,15 @@
 
 .field private mBottomTabHeight:I
 
-.field private mCarControlObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+.field private mCarControlObserver:Lcn/kuwo/core/messagemgr/b;
 
-.field private mConfigObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+.field private mConfigObserver:Lcn/kuwo/core/messagemgr/b;
 
 .field private mContext:Landroid/content/Context;
 
 .field private mDebugView:Landroid/view/View;
 
 .field private mHideAnimator:Landroid/animation/ValueAnimator;
-
-.field private mLastWidth:I
 
 .field private mMiniGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
@@ -84,7 +74,7 @@
 
 .field private mPendantGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
-.field private mPlayControlObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+.field private mPlayControlObserver:Lcn/kuwo/core/messagemgr/b;
 
 .field private mPlayerBar:Landroid/view/View;
 
@@ -92,23 +82,21 @@
 
 .field private mRootView:Landroid/view/View;
 
-.field private mSizeChangedOb:Lcn/kuwo/core/messagemgr/IObserverBase;
+.field private mSizeChangedOb:Lcn/kuwo/core/messagemgr/b;
 
-.field private mSkinChangedOb:Lcn/kuwo/core/messagemgr/IObserverBase;
+.field private mSkinChangedOb:Lcn/kuwo/core/messagemgr/b;
 
 .field private mTabRedTipManager:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabRedTipManager;
 
-.field private mThemeChangedOb:Lcn/kuwo/core/messagemgr/IObserverBase;
-
-.field private mTranslateBgView:Landroid/view/View;
+.field private mThemeChangedOb:Lcn/kuwo/core/messagemgr/b;
 
 .field private mViewPager:Lcn/kuwo/ui/common/NoScrollViewPager;
 
-.field private mVipConfigObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+.field private mVipConfigObserver:Lcn/kuwo/core/messagemgr/b;
 
 .field module:Lcn/kuwo/ui/fragment/PopModule;
 
-.field private playContentChangeObserver:Lcn/kuwo/core/observers/IPlayContentChangedObservice;
+.field private playContentChangeObserver:Lcn/kuwo/core/observers/dl;
 
 .field private rightFragment:Landroid/widget/FrameLayout;
 
@@ -118,7 +106,9 @@
 
 .field private tagView:Landroid/widget/ImageView;
 
-.field private userInfoObserver:Lcn/kuwo/core/observers/ext/UserInfoMgrObserver;
+.field touchListener:Landroid/view/View$OnTouchListener;
+
+.field private userInfoObserver:Lcn/kuwo/core/observers/ext/bg;
 
 
 # direct methods
@@ -131,117 +121,127 @@
 .method public constructor <init>(Landroid/app/Activity;)V
     .registers 4
 
-    .line 448
+    .line 390
     invoke-direct {p0, p1}, Lcn/kuwo/ui/search/ViewMode;-><init>(Landroid/app/Activity;)V
 
     const/4 v0, 0x0
 
-    .line 159
+    .line 151
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->carView:Landroid/view/View;
 
-    .line 161
+    .line 153
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->tagView:Landroid/widget/ImageView;
 
-    .line 162
+    .line 154
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->stubCar:Landroid/view/ViewStub;
 
     const/4 v0, 0x0
 
-    .line 174
+    .line 166
     iput-boolean v0, p0, Lcn/kuwo/ui/fragment/MainController;->bActive:Z
 
-    .line 175
+    .line 167
     iput-boolean v0, p0, Lcn/kuwo/ui/fragment/MainController;->isShowingCarGuide:Z
+
+    .line 168
+    iput-boolean v0, p0, Lcn/kuwo/ui/fragment/MainController;->bTouchPlayControlPanel:Z
 
     const/4 v1, 0x1
 
-    .line 177
+    .line 169
     iput-boolean v1, p0, Lcn/kuwo/ui/fragment/MainController;->isAuto:Z
 
-    .line 181
+    .line 173
     iput-boolean v0, p0, Lcn/kuwo/ui/fragment/MainController;->isLoginRefreshBottom:Z
 
-    .line 183
+    .line 174
     new-instance v0, Lcn/kuwo/ui/fragment/MainController$1;
 
     invoke-direct {v0, p0}, Lcn/kuwo/ui/fragment/MainController$1;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
-    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mVipConfigObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mVipConfigObserver:Lcn/kuwo/core/messagemgr/b;
 
-    .line 192
+    .line 182
     new-instance v0, Lcn/kuwo/ui/fragment/MainController$2;
 
     invoke-direct {v0, p0}, Lcn/kuwo/ui/fragment/MainController$2;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
-    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mSizeChangedOb:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mSizeChangedOb:Lcn/kuwo/core/messagemgr/b;
 
-    .line 205
+    .line 192
     new-instance v0, Lcn/kuwo/ui/fragment/MainController$3;
 
     invoke-direct {v0, p0}, Lcn/kuwo/ui/fragment/MainController$3;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
-    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->playContentChangeObserver:Lcn/kuwo/core/observers/IPlayContentChangedObservice;
+    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->playContentChangeObserver:Lcn/kuwo/core/observers/dl;
 
-    .line 237
+    .line 218
     new-instance v0, Lcn/kuwo/ui/fragment/MainController$4;
 
     invoke-direct {v0, p0}, Lcn/kuwo/ui/fragment/MainController$4;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
-    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->blueObserver:Lcn/kuwo/core/observers/IBlueToothStateObserver;
+    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->blueObserver:Lcn/kuwo/core/observers/y;
 
-    .line 245
+    .line 226
     new-instance v0, Lcn/kuwo/ui/fragment/MainController$5;
 
     invoke-direct {v0, p0}, Lcn/kuwo/ui/fragment/MainController$5;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
-    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->carPopObserver:Lcn/kuwo/core/observers/IBlueToothCarPopObserver;
+    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->carPopObserver:Lcn/kuwo/core/observers/x;
 
-    .line 257
+    .line 238
     new-instance v0, Lcn/kuwo/ui/fragment/MainController$6;
 
     invoke-direct {v0, p0}, Lcn/kuwo/ui/fragment/MainController$6;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
-    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/b;
 
-    .line 350
+    .line 293
     new-instance v0, Lcn/kuwo/ui/fragment/MainController$7;
 
     invoke-direct {v0, p0}, Lcn/kuwo/ui/fragment/MainController$7;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
-    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mConfigObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mConfigObserver:Lcn/kuwo/core/messagemgr/b;
 
-    .line 360
+    .line 303
     new-instance v0, Lcn/kuwo/ui/fragment/MainController$8;
 
     invoke-direct {v0, p0}, Lcn/kuwo/ui/fragment/MainController$8;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
-    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mCarControlObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mCarControlObserver:Lcn/kuwo/core/messagemgr/b;
 
-    .line 387
+    .line 330
     new-instance v0, Lcn/kuwo/ui/fragment/MainController$9;
 
     invoke-direct {v0, p0}, Lcn/kuwo/ui/fragment/MainController$9;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
-    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mThemeChangedOb:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mThemeChangedOb:Lcn/kuwo/core/messagemgr/b;
 
-    .line 401
+    .line 344
     new-instance v0, Lcn/kuwo/ui/fragment/MainController$10;
 
     invoke-direct {v0, p0}, Lcn/kuwo/ui/fragment/MainController$10;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
-    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mSkinChangedOb:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mSkinChangedOb:Lcn/kuwo/core/messagemgr/b;
 
-    .line 409
+    .line 352
     new-instance v0, Lcn/kuwo/ui/fragment/MainController$11;
 
     invoke-direct {v0, p0}, Lcn/kuwo/ui/fragment/MainController$11;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
-    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->userInfoObserver:Lcn/kuwo/core/observers/ext/UserInfoMgrObserver;
+    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->userInfoObserver:Lcn/kuwo/core/observers/ext/bg;
 
-    .line 955
+    .line 576
+    new-instance v0, Lcn/kuwo/ui/fragment/MainController$13;
+
+    invoke-direct {v0, p0}, Lcn/kuwo/ui/fragment/MainController$13;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
+
+    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->touchListener:Landroid/view/View$OnTouchListener;
+
+    .line 914
     iput-boolean v1, p0, Lcn/kuwo/ui/fragment/MainController;->isBottomLayoutShow:Z
 
-    .line 449
+    .line 391
     iput-object p1, p0, Lcn/kuwo/ui/fragment/MainController;->mContext:Landroid/content/Context;
 
     return-void
@@ -250,13 +250,13 @@
 .method private Pause()V
     .registers 4
 
-    .line 670
+    .line 620
     :try_start_0
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object v0
 
-    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->getMainControll()Lcn/kuwo/ui/fragment/MainController;
+    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->i()Lcn/kuwo/ui/fragment/MainController;
 
     move-result-object v0
 
@@ -266,7 +266,7 @@
 
     if-eqz v0, :cond_13
 
-    .line 672
+    .line 622
     invoke-virtual {v0}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabRedTipManager;->hidePop()V
     :try_end_11
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_11} :catch_12
@@ -276,17 +276,17 @@
     :catch_12
     nop
 
-    .line 677
+    .line 627
     :cond_13
     :goto_13
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->module:Lcn/kuwo/ui/fragment/PopModule;
 
     if-eqz v0, :cond_1a
 
-    .line 678
+    .line 628
     invoke-virtual {v0}, Lcn/kuwo/ui/fragment/PopModule;->pause()V
 
-    .line 680
+    .line 630
     :cond_1a
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
@@ -296,18 +296,18 @@
 
     sput v0, Lcn/kuwo/ui/fragment/MainController;->tabIndex:I
 
-    .line 681
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 631
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_CONF:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mConfigObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mConfigObserver:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->detachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->b(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 682
+    .line 632
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mAdapter:Lcn/kuwo/ui/fragment/HomePageAdapter;
 
     invoke-virtual {v0}, Lcn/kuwo/ui/fragment/HomePageAdapter;->Pause()V
@@ -318,29 +318,29 @@
 .method private Resume()V
     .registers 4
 
-    .line 661
+    .line 611
     invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->refreshMineRedDot()V
 
-    .line 662
+    .line 612
     invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->setShowRedVisible()V
 
-    .line 663
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 613
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_CONF:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mConfigObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mConfigObserver:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->attachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->a(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 664
+    .line 614
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mAdapter:Lcn/kuwo/ui/fragment/HomePageAdapter;
 
     invoke-virtual {v0}, Lcn/kuwo/ui/fragment/HomePageAdapter;->Resume()V
 
-    .line 665
+    .line 615
     invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->onStatLiveTabShowEvent()V
 
     return-void
@@ -373,13 +373,31 @@
     return-object p0
 .end method
 
-.method static synthetic access$1000(Lcn/kuwo/ui/fragment/MainController;)V
+.method static synthetic access$1100(Lcn/kuwo/ui/fragment/MainController;)Landroid/view/View;
     .registers 1
 
     .line 141
-    invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->adjustBottomHeight()V
+    iget-object p0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBar:Landroid/view/View;
 
-    return-void
+    return-object p0
+.end method
+
+.method static synthetic access$1200(Lcn/kuwo/ui/fragment/MainController;)Z
+    .registers 1
+
+    .line 141
+    iget-boolean p0, p0, Lcn/kuwo/ui/fragment/MainController;->bTouchPlayControlPanel:Z
+
+    return p0
+.end method
+
+.method static synthetic access$1202(Lcn/kuwo/ui/fragment/MainController;Z)Z
+    .registers 2
+
+    .line 141
+    iput-boolean p1, p0, Lcn/kuwo/ui/fragment/MainController;->bTouchPlayControlPanel:Z
+
+    return p1
 .end method
 
 .method static synthetic access$1300(Lcn/kuwo/ui/fragment/MainController;)V
@@ -400,142 +418,7 @@
     return-object p0
 .end method
 
-.method static synthetic access$1500(Lcn/kuwo/ui/fragment/MainController;)V
-    .registers 1
-
-    .line 141
-    invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->onBackHomeDoGrey()V
-
-    return-void
-.end method
-
-.method static synthetic access$1600(Lcn/kuwo/ui/fragment/MainController;II)V
-    .registers 3
-
-    .line 141
-    invoke-direct {p0, p1, p2}, Lcn/kuwo/ui/fragment/MainController;->liveTabChannelChange(II)V
-
-    return-void
-.end method
-
-.method static synthetic access$1700(Lcn/kuwo/ui/fragment/MainController;)Lcn/kuwo/ui/fragment/HomePageAdapter;
-    .registers 1
-
-    .line 141
-    iget-object p0, p0, Lcn/kuwo/ui/fragment/MainController;->mAdapter:Lcn/kuwo/ui/fragment/HomePageAdapter;
-
-    return-object p0
-.end method
-
-.method static synthetic access$1800(Lcn/kuwo/ui/fragment/MainController;I)V
-    .registers 2
-
-    .line 141
-    invoke-direct {p0, p1}, Lcn/kuwo/ui/fragment/MainController;->sendFeatureLoggerForTab(I)V
-
-    return-void
-.end method
-
-.method static synthetic access$1900(Lcn/kuwo/ui/fragment/MainController;)V
-    .registers 1
-
-    .line 141
-    invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->pauseAdVideoView()V
-
-    return-void
-.end method
-
-.method static synthetic access$200(Lcn/kuwo/ui/fragment/MainController;)I
-    .registers 1
-
-    .line 141
-    iget p0, p0, Lcn/kuwo/ui/fragment/MainController;->mLastWidth:I
-
-    return p0
-.end method
-
-.method static synthetic access$2000(Lcn/kuwo/ui/fragment/MainController;Ljava/lang/String;)V
-    .registers 2
-
-    .line 141
-    invoke-direct {p0, p1}, Lcn/kuwo/ui/fragment/MainController;->sendClickTabLog(Ljava/lang/String;)V
-
-    return-void
-.end method
-
-.method static synthetic access$202(Lcn/kuwo/ui/fragment/MainController;I)I
-    .registers 2
-
-    .line 141
-    iput p1, p0, Lcn/kuwo/ui/fragment/MainController;->mLastWidth:I
-
-    return p1
-.end method
-
-.method static synthetic access$2100(Lcn/kuwo/ui/fragment/MainController;I)V
-    .registers 2
-
-    .line 141
-    invoke-direct {p0, p1}, Lcn/kuwo/ui/fragment/MainController;->showFreeModeInterstitialAd(I)V
-
-    return-void
-.end method
-
-.method static synthetic access$2200(Lcn/kuwo/ui/fragment/MainController;I)V
-    .registers 2
-
-    .line 141
-    invoke-direct {p0, p1}, Lcn/kuwo/ui/fragment/MainController;->onClickBottomTabDoGrey(I)V
-
-    return-void
-.end method
-
-.method static synthetic access$300(Lcn/kuwo/ui/fragment/MainController;)V
-    .registers 1
-
-    .line 141
-    invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->initViewSize()V
-
-    return-void
-.end method
-
-.method static synthetic access$400(Lcn/kuwo/ui/fragment/MainController;)Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
-    .registers 1
-
-    .line 141
-    iget-object p0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
-
-    return-object p0
-.end method
-
-.method static synthetic access$500(Lcn/kuwo/ui/fragment/MainController;)Landroid/view/View;
-    .registers 1
-
-    .line 141
-    iget-object p0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
-
-    return-object p0
-.end method
-
-.method static synthetic access$600(Lcn/kuwo/ui/fragment/MainController;)V
-    .registers 1
-
-    .line 141
-    invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->recordFirstPlayMusicTime()V
-
-    return-void
-.end method
-
-.method static synthetic access$700(Lcn/kuwo/ui/fragment/MainController;)V
-    .registers 1
-
-    .line 141
-    invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->sendMusicPauseLog()V
-
-    return-void
-.end method
-
-.method static synthetic access$800()I
+.method static synthetic access$1500()I
     .registers 1
 
     .line 141
@@ -544,7 +427,7 @@
     return v0
 .end method
 
-.method static synthetic access$802(I)I
+.method static synthetic access$1502(I)I
     .registers 1
 
     .line 141
@@ -553,7 +436,115 @@
     return p0
 .end method
 
-.method static synthetic access$900(Lcn/kuwo/ui/fragment/MainController;)V
+.method static synthetic access$1600(Lcn/kuwo/ui/fragment/MainController;)V
+    .registers 1
+
+    .line 141
+    invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->onBackHomeDoGrey()V
+
+    return-void
+.end method
+
+.method static synthetic access$1700(Lcn/kuwo/ui/fragment/MainController;II)V
+    .registers 3
+
+    .line 141
+    invoke-direct {p0, p1, p2}, Lcn/kuwo/ui/fragment/MainController;->liveTabChannelChange(II)V
+
+    return-void
+.end method
+
+.method static synthetic access$1800(Lcn/kuwo/ui/fragment/MainController;)Lcn/kuwo/ui/fragment/HomePageAdapter;
+    .registers 1
+
+    .line 141
+    iget-object p0, p0, Lcn/kuwo/ui/fragment/MainController;->mAdapter:Lcn/kuwo/ui/fragment/HomePageAdapter;
+
+    return-object p0
+.end method
+
+.method static synthetic access$1900(Lcn/kuwo/ui/fragment/MainController;I)V
+    .registers 2
+
+    .line 141
+    invoke-direct {p0, p1}, Lcn/kuwo/ui/fragment/MainController;->sendFeatureLoggerForTab(I)V
+
+    return-void
+.end method
+
+.method static synthetic access$200(Lcn/kuwo/ui/fragment/MainController;)V
+    .registers 1
+
+    .line 141
+    invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->initViewSize()V
+
+    return-void
+.end method
+
+.method static synthetic access$2000(Lcn/kuwo/ui/fragment/MainController;)V
+    .registers 1
+
+    .line 141
+    invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->pauseAdVideoView()V
+
+    return-void
+.end method
+
+.method static synthetic access$2100(Lcn/kuwo/ui/fragment/MainController;Ljava/lang/String;)V
+    .registers 2
+
+    .line 141
+    invoke-direct {p0, p1}, Lcn/kuwo/ui/fragment/MainController;->sendClickTabLog(Ljava/lang/String;)V
+
+    return-void
+.end method
+
+.method static synthetic access$2200(Lcn/kuwo/ui/fragment/MainController;I)V
+    .registers 2
+
+    .line 141
+    invoke-direct {p0, p1}, Lcn/kuwo/ui/fragment/MainController;->showFreeModeInterstitialAd(I)V
+
+    return-void
+.end method
+
+.method static synthetic access$2300(Lcn/kuwo/ui/fragment/MainController;I)V
+    .registers 2
+
+    .line 141
+    invoke-direct {p0, p1}, Lcn/kuwo/ui/fragment/MainController;->onClickBottomTabDoGrey(I)V
+
+    return-void
+.end method
+
+.method static synthetic access$300(Lcn/kuwo/ui/fragment/MainController;)Landroid/view/View;
+    .registers 1
+
+    .line 141
+    iget-object p0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
+
+    return-object p0
+.end method
+
+.method static synthetic access$400(Lcn/kuwo/ui/fragment/MainController;)V
+    .registers 1
+
+    .line 141
+    invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->recordFirstPlayMusicTime()V
+
+    return-void
+.end method
+
+.method static synthetic access$500(Lcn/kuwo/ui/fragment/MainController;)V
+    .registers 1
+
+    .line 141
+    invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->sendMusicPauseLog()V
+
+    return-void
+.end method
+
+.method static synthetic access$600(Lcn/kuwo/ui/fragment/MainController;)V
     .registers 1
 
     .line 141
@@ -562,56 +553,93 @@
     return-void
 .end method
 
+.method static synthetic access$700(Lcn/kuwo/ui/fragment/MainController;)V
+    .registers 1
+
+    .line 141
+    invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->adjustBottomHeight()V
+
+    return-void
+.end method
+
+.method static synthetic access$800(Lcn/kuwo/ui/fragment/MainController;)Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
+    .registers 1
+
+    .line 141
+    iget-object p0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
+
+    return-object p0
+.end method
+
 .method private adjustBottomHeight()V
     .registers 3
 
-    .line 1239
-    iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
-
-    invoke-virtual {v0}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->adjustHeight()I
+    .line 1211
+    invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->getBottomHeight()I
 
     move-result v0
 
     iput v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTabHeight:I
 
-    .line 1241
+    .line 1213
+    iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
+
+    if-eqz v0, :cond_17
+
+    .line 1214
+    invoke-virtual {v0}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->getLayoutParams()Landroid/view/ViewGroup$LayoutParams;
+
+    move-result-object v0
+
+    .line 1215
+    iget v1, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTabHeight:I
+
+    iput v1, v0, Landroid/view/ViewGroup$LayoutParams;->height:I
+
+    .line 1216
+    iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
+
+    invoke-virtual {v1, v0}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V
+
+    .line 1219
+    :cond_17
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
-    if-eqz v0, :cond_1b
+    if-eqz v0, :cond_2a
 
-    .line 1242
+    .line 1221
     invoke-virtual {v0}, Landroid/view/View;->getLayoutParams()Landroid/view/ViewGroup$LayoutParams;
 
     move-result-object v0
 
     check-cast v0, Landroid/widget/RelativeLayout$LayoutParams;
 
-    .line 1243
+    .line 1222
     iget v1, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTabHeight:I
 
     iput v1, v0, Landroid/widget/RelativeLayout$LayoutParams;->bottomMargin:I
 
-    .line 1244
+    .line 1223
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     invoke-virtual {v1, v0}, Landroid/view/View;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V
 
-    :cond_1b
+    :cond_2a
     return-void
 .end method
 
 .method private debugStackView()V
     .registers 6
 
-    .line 1550
-    sget-boolean v0, Lcn/kuwo/base/utils/AppInfo;->IS_DEBUG:Z
+    .line 1523
+    sget-boolean v0, Lcn/kuwo/base/utils/b;->N:Z
 
-    if-eqz v0, :cond_94
+    if-eqz v0, :cond_92
 
-    .line 1551
+    .line 1524
     new-instance v0, Lcn/kuwo/ui/view/DebugStackView;
 
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object v1
 
@@ -619,18 +647,18 @@
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mDebugView:Landroid/view/View;
 
-    .line 1552
+    .line 1525
     new-instance v0, Landroid/widget/FrameLayout$LayoutParams;
 
     const/high16 v1, 0x42200000  # 40.0f
 
-    .line 1553
-    invoke-static {v1}, Lcn/kuwo/base/uilib/ScreenUtility;->dip2px(F)I
+    .line 1526
+    invoke-static {v1}, Lcn/kuwo/base/uilib/m;->b(F)I
 
     move-result v2
 
-    .line 1554
-    invoke-static {v1}, Lcn/kuwo/base/uilib/ScreenUtility;->dip2px(F)I
+    .line 1527
+    invoke-static {v1}, Lcn/kuwo/base/uilib/m;->b(F)I
 
     move-result v1
 
@@ -640,47 +668,47 @@
 
     const/high16 v2, -0x40800000  # -1.0f
 
-    const-string/jumbo v3, "key_save_debug_view_pos_x"
+    const-string v3, "key_save_debug_view_pos_x"
 
-    .line 1555
-    invoke-static {v1, v3, v2}, Lcn/kuwo/base/config/ConfMgr;->getFloatValue(Ljava/lang/String;Ljava/lang/String;F)F
+    .line 1528
+    invoke-static {v1, v3, v2}, Lcn/kuwo/base/config/c;->a(Ljava/lang/String;Ljava/lang/String;F)F
 
     move-result v3
 
-    const-string/jumbo v4, "key_save_debug_view_pos_y"
+    const-string v4, "key_save_debug_view_pos_y"
 
-    .line 1556
-    invoke-static {v1, v4, v2}, Lcn/kuwo/base/config/ConfMgr;->getFloatValue(Ljava/lang/String;Ljava/lang/String;F)F
+    .line 1529
+    invoke-static {v1, v4, v2}, Lcn/kuwo/base/config/c;->a(Ljava/lang/String;Ljava/lang/String;F)F
 
     move-result v1
 
     cmpl-float v4, v3, v2
 
-    if-eqz v4, :cond_43
+    if-eqz v4, :cond_41
 
     cmpl-float v2, v1, v2
 
-    if-eqz v2, :cond_43
+    if-eqz v2, :cond_41
 
-    .line 1558
+    .line 1531
     iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mDebugView:Landroid/view/View;
 
     invoke-virtual {v2, v3}, Landroid/view/View;->setX(F)V
 
-    .line 1559
+    .line 1532
     iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mDebugView:Landroid/view/View;
 
     invoke-virtual {v2, v1}, Landroid/view/View;->setY(F)V
 
-    goto :goto_57
+    goto :goto_55
 
-    .line 1561
-    :cond_43
+    .line 1534
+    :cond_41
     iget v1, v0, Landroid/widget/FrameLayout$LayoutParams;->leftMargin:I
 
     const/high16 v2, 0x42a00000  # 80.0f
 
-    invoke-static {v2}, Lcn/kuwo/base/uilib/ScreenUtility;->dip2px(F)I
+    invoke-static {v2}, Lcn/kuwo/base/uilib/m;->b(F)I
 
     move-result v2
 
@@ -692,16 +720,16 @@
 
     const v1, 0x800035
 
-    .line 1563
+    .line 1536
     iput v1, v0, Landroid/widget/FrameLayout$LayoutParams;->gravity:I
 
-    .line 1565
-    :goto_57
+    .line 1538
+    :goto_55
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mDebugView:Landroid/view/View;
 
     invoke-virtual {v1, v0}, Landroid/view/View;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 1566
+    .line 1539
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mDebugView:Landroid/view/View;
 
     new-instance v1, Lcn/kuwo/ui/fragment/-$$Lambda$MainController$T5nEhxlxzqhj0le8IukxT4WYilE;
@@ -710,8 +738,8 @@
 
     invoke-virtual {v0, v1}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
-    .line 1582
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    .line 1555
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object v0
 
@@ -719,33 +747,33 @@
 
     move-result-object v0
 
-    if-nez v0, :cond_71
+    if-nez v0, :cond_6f
 
     return-void
 
-    .line 1586
-    :cond_71
+    .line 1559
+    :cond_6f
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mDebugView:Landroid/view/View;
 
     invoke-virtual {v1}, Landroid/view/View;->getParent()Landroid/view/ViewParent;
 
     move-result-object v1
 
-    if-ne v1, v0, :cond_7a
+    if-ne v1, v0, :cond_78
 
     return-void
 
-    .line 1589
-    :cond_7a
+    .line 1562
+    :cond_78
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mDebugView:Landroid/view/View;
 
     invoke-virtual {v1}, Landroid/view/View;->getParent()Landroid/view/ViewParent;
 
     move-result-object v1
 
-    if-eqz v1, :cond_8f
+    if-eqz v1, :cond_8d
 
-    .line 1590
+    .line 1563
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mDebugView:Landroid/view/View;
 
     invoke-virtual {v1}, Landroid/view/View;->getParent()Landroid/view/ViewParent;
@@ -758,13 +786,13 @@
 
     invoke-virtual {v1, v2}, Landroid/view/ViewGroup;->removeView(Landroid/view/View;)V
 
-    .line 1592
-    :cond_8f
+    .line 1565
+    :cond_8d
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mDebugView:Landroid/view/View;
 
     invoke-virtual {v0, v1}, Landroid/widget/FrameLayout;->addView(Landroid/view/View;)V
 
-    :cond_94
+    :cond_92
     return-void
 .end method
 
@@ -773,7 +801,7 @@
 
     if-eqz p1, :cond_18
 
-    .line 1605
+    .line 1578
     :try_start_2
     invoke-virtual {p1}, Landroid/app/Activity;->getWindow()Landroid/view/Window;
 
@@ -785,7 +813,7 @@
 
     const v0, 0x1020002
 
-    .line 1606
+    .line 1579
     invoke-virtual {p1, v0}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
     move-result-object p1
@@ -799,7 +827,7 @@
     :catch_14
     move-exception p1
 
-    .line 1608
+    .line 1581
     invoke-virtual {p1}, Ljava/lang/Exception;->printStackTrace()V
 
     :cond_18
@@ -808,15 +836,45 @@
     return-object p1
 .end method
 
+.method private getBottomHeight()I
+    .registers 2
+
+    .line 1203
+    invoke-static {}, Lcom/kuwo/skin/config/b;->h()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_d
+
+    const/high16 v0, 0x42800000  # 64.0f
+
+    .line 1204
+    invoke-static {v0}, Lcn/kuwo/base/uilib/m;->b(F)I
+
+    move-result v0
+
+    return v0
+
+    :cond_d
+    const/high16 v0, 0x42480000  # 50.0f
+
+    .line 1206
+    invoke-static {v0}, Lcn/kuwo/base/uilib/m;->b(F)I
+
+    move-result v0
+
+    return v0
+.end method
+
 .method private getWxSongBookFragment(Ljava/lang/String;)Lcn/kuwo/ui/weex/fragment/WxLoadFragment;
     .registers 7
 
-    .line 578
+    .line 527
     new-instance v0, Lcn/kuwo/ui/weex/bean/WxPageInitParaBean;
 
     invoke-direct {v0}, Lcn/kuwo/ui/weex/bean/WxPageInitParaBean;-><init>()V
 
-    .line 579
+    .line 528
     invoke-static {}, Lcn/kuwo/mod/weex/utils/WxJumper;->songBookPageUrl()Ljava/lang/String;
 
     move-result-object v1
@@ -825,29 +883,29 @@
 
     const/4 v1, 0x0
 
-    .line 580
+    .line 529
     invoke-virtual {v0, v1}, Lcn/kuwo/ui/weex/bean/WxPageInitParaBean;->setNavShow(Z)V
 
-    .line 582
+    .line 531
     new-instance v1, Lcn/kuwo/ui/weex/fragment/WxLazyFragment;
 
     invoke-direct {v1}, Lcn/kuwo/ui/weex/fragment/WxLazyFragment;-><init>()V
 
-    .line 583
+    .line 532
     new-instance v2, Landroid/os/Bundle;
 
     invoke-direct {v2}, Landroid/os/Bundle;-><init>()V
 
     const-string/jumbo v3, "pSrc"
 
-    .line 584
+    .line 533
     invoke-virtual {v2, v3, p1}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
 
     const-string/jumbo p1, "pageNum"
 
     const/4 v3, -0x4
 
-    .line 585
+    .line 534
     invoke-virtual {v2, p1, v3}, Landroid/os/Bundle;->putInt(Ljava/lang/String;I)V
 
     const/4 p1, 0x0
@@ -856,30 +914,30 @@
 
     const/4 v4, 0x1
 
-    .line 586
-    invoke-static {p1, v3, v4}, Lcn/kuwo/base/log/psrc/PsrcOptional;->build(Lcn/kuwo/base/log/psrc/PsrcInfo;Ljava/lang/String;I)Lcn/kuwo/base/log/psrc/PsrcInfo;
+    .line 535
+    invoke-static {p1, v3, v4}, Lcn/kuwo/base/log/psrc/c;->a(Lcn/kuwo/base/log/psrc/PsrcInfo;Ljava/lang/String;I)Lcn/kuwo/base/log/psrc/PsrcInfo;
 
     move-result-object p1
 
-    const-string/jumbo v3, "init"
+    const-string v3, "init"
 
-    .line 587
+    .line 536
     invoke-virtual {v2, v3, v0}, Landroid/os/Bundle;->putSerializable(Ljava/lang/String;Ljava/io/Serializable;)V
 
-    .line 588
-    invoke-static {p1}, Lcn/kuwo/base/log/psrc/PsrcOptional;->get(Lcn/kuwo/base/log/psrc/PsrcInfo;)Lcn/kuwo/base/log/psrc/Nullable;
+    .line 537
+    invoke-static {p1}, Lcn/kuwo/base/log/psrc/c;->a(Lcn/kuwo/base/log/psrc/PsrcInfo;)Lcn/kuwo/base/log/psrc/b;
 
     move-result-object p1
 
-    invoke-interface {p1}, Lcn/kuwo/base/log/psrc/Nullable;->getLcn()Ljava/lang/String;
+    invoke-interface {p1}, Lcn/kuwo/base/log/psrc/b;->getLcn()Ljava/lang/String;
 
     move-result-object p1
 
-    const-string/jumbo v0, "lcn"
+    const-string v0, "lcn"
 
     invoke-virtual {v2, v0, p1}, Landroid/os/Bundle;->putString(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 589
+    .line 538
     invoke-virtual {v1, v2}, Lcn/kuwo/ui/weex/fragment/WxLazyFragment;->setArguments(Landroid/os/Bundle;)V
 
     return-object v1
@@ -888,8 +946,8 @@
 .method private initViewSize()V
     .registers 4
 
-    .line 546
-    invoke-static {}, Lcn/kuwo/base/utils/DeviceInfo;->isFoldableDevice()Z
+    .line 495
+    invoke-static {}, Lcn/kuwo/base/utils/j;->k()Z
 
     move-result v0
 
@@ -897,13 +955,13 @@
 
     return-void
 
-    .line 550
+    .line 499
     :cond_7
-    invoke-static {}, Lcn/kuwo/base/fragment/FragmentOperation;->getInstance()Lcn/kuwo/base/fragment/FragmentOperation;
+    invoke-static {}, Lcn/kuwo/base/fragment/b;->getInstance()Lcn/kuwo/base/fragment/b;
 
     move-result-object v0
 
-    invoke-virtual {v0}, Lcn/kuwo/base/fragment/FragmentOperation;->getTopFragment()Landroidx/fragment/app/Fragment;
+    invoke-virtual {v0}, Lcn/kuwo/base/fragment/b;->getTopFragment()Landroidx/fragment/app/Fragment;
 
     move-result-object v0
 
@@ -911,7 +969,7 @@
 
     if-eqz v0, :cond_46
 
-    .line 551
+    .line 500
     invoke-static {}, Lcn/kuwo/ui/fragment/RightFragmentController;->getInstance()Lcn/kuwo/ui/fragment/RightFragmentController;
 
     move-result-object v2
@@ -934,7 +992,7 @@
 
     if-eqz v0, :cond_46
 
-    .line 552
+    .line 501
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->rightFragment:Landroid/widget/FrameLayout;
 
     invoke-virtual {v0}, Landroid/widget/FrameLayout;->getVisibility()I
@@ -943,12 +1001,12 @@
 
     if-nez v0, :cond_36
 
-    .line 553
+    .line 502
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->rightFragment:Landroid/widget/FrameLayout;
 
     invoke-virtual {v0, v1}, Landroid/widget/FrameLayout;->setVisibility(I)V
 
-    .line 555
+    .line 504
     :cond_36
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->rlLeft:Landroid/widget/RelativeLayout;
 
@@ -956,51 +1014,51 @@
 
     move-result-object v0
 
-    .line 556
-    sget v1, Lcn/kuwo/base/utils/DeviceInfo;->ACTUALWIDTH:I
+    .line 505
+    sget v1, Lcn/kuwo/base/utils/j;->g:I
 
     iput v1, v0, Landroid/view/ViewGroup$LayoutParams;->width:I
 
-    .line 557
+    .line 506
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->rlLeft:Landroid/widget/RelativeLayout;
 
     invoke-virtual {v1, v0}, Landroid/widget/RelativeLayout;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V
 
     return-void
 
-    .line 560
+    .line 509
     :cond_46
-    invoke-static {}, Lcn/kuwo/base/utils/DeviceInfo;->isFoldStates()Z
+    invoke-static {}, Lcn/kuwo/base/utils/j;->p()Z
 
     move-result v0
 
     if-nez v0, :cond_69
 
-    .line 562
+    .line 511
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->rightFragment:Landroid/widget/FrameLayout;
 
     const/4 v1, 0x0
 
     invoke-virtual {v0, v1}, Landroid/widget/FrameLayout;->setVisibility(I)V
 
-    .line 563
+    .line 512
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->rlLeft:Landroid/widget/RelativeLayout;
 
     invoke-virtual {v0}, Landroid/widget/RelativeLayout;->getLayoutParams()Landroid/view/ViewGroup$LayoutParams;
 
     move-result-object v0
 
-    .line 564
-    sget v1, Lcn/kuwo/base/utils/DeviceInfo;->WIDTH:I
+    .line 513
+    sget v1, Lcn/kuwo/base/utils/j;->f:I
 
     iput v1, v0, Landroid/view/ViewGroup$LayoutParams;->width:I
 
-    .line 565
+    .line 514
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->rlLeft:Landroid/widget/RelativeLayout;
 
     invoke-virtual {v1, v0}, Landroid/widget/RelativeLayout;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 566
+    .line 515
     invoke-static {}, Lcn/kuwo/ui/fragment/RightFragmentController;->getInstance()Lcn/kuwo/ui/fragment/RightFragmentController;
 
     move-result-object v0
@@ -1009,30 +1067,30 @@
 
     goto :goto_84
 
-    .line 569
+    .line 518
     :cond_69
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->rightFragment:Landroid/widget/FrameLayout;
 
     invoke-virtual {v0, v1}, Landroid/widget/FrameLayout;->setVisibility(I)V
 
-    .line 570
+    .line 519
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->rlLeft:Landroid/widget/RelativeLayout;
 
     invoke-virtual {v0}, Landroid/widget/RelativeLayout;->getLayoutParams()Landroid/view/ViewGroup$LayoutParams;
 
     move-result-object v0
 
-    .line 571
-    sget v1, Lcn/kuwo/base/utils/DeviceInfo;->ACTUALWIDTH:I
+    .line 520
+    sget v1, Lcn/kuwo/base/utils/j;->g:I
 
     iput v1, v0, Landroid/view/ViewGroup$LayoutParams;->width:I
 
-    .line 572
+    .line 521
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->rlLeft:Landroid/widget/RelativeLayout;
 
     invoke-virtual {v1, v0}, Landroid/widget/RelativeLayout;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 573
+    .line 522
     invoke-static {}, Lcn/kuwo/ui/fragment/RightFragmentController;->getInstance()Lcn/kuwo/ui/fragment/RightFragmentController;
 
     move-result-object v0
@@ -1048,7 +1106,7 @@
 
     const-string/jumbo v0, "show_from_unnormal"
 
-    const/4 v1, 0x3
+    const/4 v1, 0x2
 
     const-string v2, ""
 
@@ -1056,22 +1114,22 @@
 
     if-ne p2, v1, :cond_24
 
-    .line 804
-    invoke-static {v2, v0, v3}, Lcn/kuwo/base/config/ConfMgr;->getBoolValue(Ljava/lang/String;Ljava/lang/String;Z)Z
+    .line 752
+    invoke-static {v2, v0, v3}, Lcn/kuwo/base/config/c;->a(Ljava/lang/String;Ljava/lang/String;Z)Z
 
     move-result p1
 
     if-nez p1, :cond_31
 
-    .line 805
-    sget-object p1, Lcn/kuwo/base/utils/AppInfo;->LIVE_TAB_SHOW_CHANNEL:Ljava/lang/String;
+    .line 753
+    sget-object p1, Lcn/kuwo/base/utils/b;->p:Ljava/lang/String;
 
     const-string/jumbo p2, "show_from_unnormal_channel"
 
-    invoke-static {v2, p2, p1, v3}, Lcn/kuwo/base/config/ConfMgr;->setStringValue(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)Z
+    invoke-static {v2, p2, p1, v3}, Lcn/kuwo/base/config/c;->a(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)Z
 
-    .line 806
-    invoke-static {}, Lcn/kuwo/core/modulemgr/ModMgr;->getMobileAdMgr()Lcn/kuwo/mod/mobilead/IAdMgr;
+    .line 754
+    invoke-static {}, Lcn/kuwo/core/modulemgr/b;->s()Lcn/kuwo/mod/mobilead/IAdMgr;
 
     move-result-object p1
 
@@ -1088,63 +1146,79 @@
 
     if-ne p1, v1, :cond_31
 
-    .line 809
-    invoke-static {v2, v0, v3}, Lcn/kuwo/base/config/ConfMgr;->getBoolValue(Ljava/lang/String;Ljava/lang/String;Z)Z
+    .line 757
+    invoke-static {v2, v0, v3}, Lcn/kuwo/base/config/c;->a(Ljava/lang/String;Ljava/lang/String;Z)Z
 
     move-result p1
 
     if-eqz p1, :cond_31
 
-    .line 810
-    invoke-static {v2, v0, v3, v3}, Lcn/kuwo/base/config/ConfMgr;->setBoolValue(Ljava/lang/String;Ljava/lang/String;ZZ)Z
+    .line 758
+    invoke-static {v2, v0, v3, v3}, Lcn/kuwo/base/config/c;->a(Ljava/lang/String;Ljava/lang/String;ZZ)Z
 
     :cond_31
     :goto_31
     return-void
 .end method
 
+.method private newTab(Ljava/lang/String;II)Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabItemView;
+    .registers 6
+
+    .line 679
+    new-instance v0, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabItemView;
+
+    iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mContext:Landroid/content/Context;
+
+    invoke-direct {v0, v1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabItemView;-><init>(Landroid/content/Context;)V
+
+    .line 680
+    invoke-virtual {v0, p1, p2, p3}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabItemView;->initialize(Ljava/lang/String;II)V
+
+    return-object v0
+.end method
+
 .method private onBackHomeDoGrey()V
     .registers 4
 
-    .line 1458
+    .line 1431
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mMiniGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
     if-nez v0, :cond_5
 
     return-void
 
-    .line 1461
+    .line 1434
     :cond_5
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object v0
 
-    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->getMainControll()Lcn/kuwo/ui/fragment/MainController;
+    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->i()Lcn/kuwo/ui/fragment/MainController;
 
     move-result-object v0
 
     if-eqz v0, :cond_2d
 
-    .line 1463
+    .line 1436
     invoke-virtual {v0}, Lcn/kuwo/ui/fragment/MainController;->getCurrentTab()Landroidx/fragment/app/Fragment;
 
     move-result-object v0
 
-    .line 1464
+    .line 1437
     instance-of v1, v0, Lcn/kuwo/ui/online/library/LibraryHomeFragment;
 
     const/4 v2, 0x1
 
     if-eqz v1, :cond_28
 
-    .line 1465
+    .line 1438
     check-cast v0, Lcn/kuwo/ui/online/library/LibraryHomeFragment;
 
     invoke-virtual {v0}, Lcn/kuwo/ui/online/library/LibraryHomeFragment;->getCurrentPageType()I
 
     move-result v0
 
-    .line 1466
+    .line 1439
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mMiniGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
     if-eqz v0, :cond_23
@@ -1159,7 +1233,7 @@
 
     goto :goto_2d
 
-    .line 1468
+    .line 1441
     :cond_28
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mMiniGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
@@ -1173,7 +1247,7 @@
 .method private onClickBottomTabDoGrey(I)V
     .registers 6
 
-    .line 1433
+    .line 1406
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mMiniGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
     if-eqz v0, :cond_67
@@ -1197,56 +1271,56 @@
 
     if-eqz p1, :cond_27
 
-    .line 1437
+    .line 1410
     invoke-virtual {v0, v1}, Lcn/kuwo/ui/widget/GrayFrameLayout;->setForceColor(Z)V
 
-    .line 1438
+    .line 1411
     iget-object p1, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
     invoke-virtual {p1, v1}, Lcn/kuwo/ui/widget/GrayFrameLayout;->setForceColor(Z)V
 
-    .line 1439
+    .line 1412
     iget-object p1, p0, Lcn/kuwo/ui/fragment/MainController;->mBkgGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
     invoke-virtual {p1, v1}, Lcn/kuwo/ui/widget/GrayFrameLayout;->setForceColor(Z)V
 
-    .line 1440
+    .line 1413
     iget-object p1, p0, Lcn/kuwo/ui/fragment/MainController;->mPendantGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
     invoke-virtual {p1, v1}, Lcn/kuwo/ui/widget/GrayFrameLayout;->setForceColor(Z)V
 
     goto :goto_67
 
-    .line 1442
+    .line 1415
     :cond_27
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object p1
 
-    invoke-virtual {p1}, Lcn/kuwo/player/activities/MainActivity;->getMainControll()Lcn/kuwo/ui/fragment/MainController;
+    invoke-virtual {p1}, Lcn/kuwo/player/activities/MainActivity;->i()Lcn/kuwo/ui/fragment/MainController;
 
     move-result-object p1
 
     if-eqz p1, :cond_67
 
-    .line 1444
+    .line 1417
     invoke-virtual {p1}, Lcn/kuwo/ui/fragment/MainController;->getCurrentTab()Landroidx/fragment/app/Fragment;
 
     move-result-object p1
 
-    .line 1445
+    .line 1418
     instance-of v0, p1, Lcn/kuwo/ui/online/library/LibraryHomeFragment;
 
     if-eqz v0, :cond_67
 
-    .line 1446
+    .line 1419
     check-cast p1, Lcn/kuwo/ui/online/library/LibraryHomeFragment;
 
     invoke-virtual {p1}, Lcn/kuwo/ui/online/library/LibraryHomeFragment;->getCurrentTabPosition()I
 
     move-result p1
 
-    .line 1447
+    .line 1420
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
     const/4 v2, 0x0
@@ -1263,7 +1337,7 @@
     :goto_47
     invoke-virtual {v0, v3}, Lcn/kuwo/ui/widget/GrayFrameLayout;->setForceColor(Z)V
 
-    .line 1448
+    .line 1421
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mMiniGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
     if-eqz p1, :cond_50
@@ -1278,7 +1352,7 @@
     :goto_51
     invoke-virtual {v0, v3}, Lcn/kuwo/ui/widget/GrayFrameLayout;->setForceColor(Z)V
 
-    .line 1449
+    .line 1422
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBkgGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
     if-eqz p1, :cond_5a
@@ -1293,7 +1367,7 @@
     :goto_5b
     invoke-virtual {v0, v3}, Lcn/kuwo/ui/widget/GrayFrameLayout;->setForceColor(Z)V
 
-    .line 1450
+    .line 1423
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPendantGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
     if-eqz p1, :cond_63
@@ -1314,8 +1388,8 @@
 .method public static onStatLiveHomeTabShowEvent(Z)V
     .registers 3
 
-    .line 1627
-    invoke-static {}, Lcn/kuwo/core/modulemgr/ModMgr;->getUserInfoMgr()Lcn/kuwo/mod/userinfo/IUserInfoMgr;
+    .line 1600
+    invoke-static {}, Lcn/kuwo/core/modulemgr/b;->e()Lcn/kuwo/mod/userinfo/IUserInfoMgr;
 
     move-result-object v0
 
@@ -1337,7 +1411,7 @@
     :goto_10
     if-eqz v0, :cond_1a
 
-    .line 1628
+    .line 1601
     invoke-virtual {v0}, Lcn/kuwo/base/bean/UserInfo;->getUid()I
 
     move-result v0
@@ -1347,13 +1421,13 @@
     move-result-object v1
 
     :cond_1a
-    const-string/jumbo v0, "kw_livehometab_isred_show"
+    const-string v0, "kw_livehometab_isred_show"
 
     invoke-static {v0, p0, v1}, Lcn/kuwo/show/ui/utils/kukuhome/ShowListBiUtils2;->onEvent(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
 
     const/4 p0, 0x0
 
-    .line 1629
+    .line 1602
     sput-boolean p0, Lcn/kuwo/show/base/constants/LiveTabRedNumConstant;->IS_SHOW_LIVE_TAB_SHOW_REPORT:Z
 
     return-void
@@ -1362,9 +1436,9 @@
 .method private onStatLiveTabShowEvent()V
     .registers 2
 
-    const-string/jumbo v0, "kw_cashdiversion_rain_kantab_show"
+    const-string v0, "kw_cashdiversion_rain_kantab_show"
 
-    .line 1618
+    .line 1591
     invoke-static {v0}, Lcn/kuwo/show/ui/utils/kukuhome/ShowListBiUtils2;->onEvent(Ljava/lang/String;)V
 
     return-void
@@ -1379,7 +1453,7 @@
 .method private recordFirstPlayMusicTime()V
     .registers 7
 
-    .line 341
+    .line 284
     new-instance v0, Lcn/kuwo/base/utils/KwDate;
 
     invoke-direct {v0}, Lcn/kuwo/base/utils/KwDate;-><init>()V
@@ -1390,17 +1464,17 @@
 
     const-string v3, " "
 
-    .line 342
-    invoke-static {v2, v1, v3}, Lcn/kuwo/base/config/ConfMgr;->getStringValue(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    .line 285
+    invoke-static {v2, v1, v3}, Lcn/kuwo/base/config/c;->a(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v3
 
-    .line 343
+    .line 286
     invoke-virtual {v0}, Lcn/kuwo/base/utils/KwDate;->today()Ljava/lang/String;
 
     move-result-object v0
 
-    .line 344
+    .line 287
     invoke-static {v3}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
 
     move-result v4
@@ -1429,15 +1503,15 @@
     :goto_25
     if-eqz v3, :cond_30
 
-    .line 345
-    invoke-static {}, Lcn/kuwo/base/utils/NetworkStateUtil;->isAvaliable()Z
+    .line 288
+    invoke-static {}, Lcn/kuwo/base/utils/NetworkStateUtil;->a()Z
 
     move-result v3
 
     if-eqz v3, :cond_30
 
-    .line 346
-    invoke-static {v2, v1, v0, v5}, Lcn/kuwo/base/config/ConfMgr;->setStringValue(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)Z
+    .line 289
+    invoke-static {v2, v1, v0, v5}, Lcn/kuwo/base/config/c;->a(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)Z
 
     :cond_30
     return-void
@@ -1452,22 +1526,22 @@
 
     const/4 v2, 0x0
 
-    .line 873
-    invoke-static {v1, v0, v2}, Lcn/kuwo/base/config/ConfMgr;->getBoolValue(Ljava/lang/String;Ljava/lang/String;Z)Z
+    .line 831
+    invoke-static {v1, v0, v2}, Lcn/kuwo/base/config/c;->a(Ljava/lang/String;Ljava/lang/String;Z)Z
 
     move-result v3
 
     if-eqz v3, :cond_16
 
-    .line 875
-    invoke-static {v1, v0, v2, v2}, Lcn/kuwo/base/config/ConfMgr;->setBoolValue(Ljava/lang/String;Ljava/lang/String;ZZ)Z
+    .line 833
+    invoke-static {v1, v0, v2, v2}, Lcn/kuwo/base/config/c;->a(Ljava/lang/String;Ljava/lang/String;ZZ)Z
 
-    .line 876
+    .line 834
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
-    const/4 v1, 0x4
+    const/4 v1, 0x3
 
-    invoke-virtual {v0, v1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->showRedDot(I)V
+    invoke-virtual {v0, v1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->setRedDot(I)V
 
     :cond_16
     return-void
@@ -1476,23 +1550,23 @@
 .method private sendClickTabLog(Ljava/lang/String;)V
     .registers 4
 
-    .line 1507
+    .line 1480
     new-instance v0, Lcn/kuwo/base/log/SafeProperties;
 
     invoke-direct {v0}, Lcn/kuwo/base/log/SafeProperties;-><init>()V
 
     const-string/jumbo v1, "tab"
 
-    .line 1508
+    .line 1481
     invoke-virtual {v0, v1, p1}, Lcn/kuwo/base/log/SafeProperties;->setProperty(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/Object;
 
-    const-string/jumbo v1, "home_bottom_tab"
+    const-string v1, "home_bottom_tab"
 
-    .line 1509
-    invoke-static {v1, v0}, Lcn/kuwo/base/log/DotLog;->send(Ljava/lang/String;Lcn/kuwo/base/log/SafeProperties;)V
+    .line 1482
+    invoke-static {v1, v0}, Lcn/kuwo/base/log/f;->a(Ljava/lang/String;Lcn/kuwo/base/log/SafeProperties;)V
 
-    .line 1510
-    invoke-static {p1}, Lcn/kuwo/base/log/OperationStatisticsLog;->sendPsrcLog(Ljava/lang/String;)V
+    .line 1483
+    invoke-static {p1}, Lcn/kuwo/base/log/o;->a(Ljava/lang/String;)V
 
     return-void
 .end method
@@ -1504,17 +1578,17 @@
 
     if-eqz p1, :cond_26
 
-    const/4 v1, 0x3
+    const/4 v1, 0x2
 
     if-eq p1, v1, :cond_20
 
-    const/4 v1, 0x4
+    const/4 v1, 0x3
 
     if-eq p1, v1, :cond_a
 
     goto :goto_36
 
-    .line 818
+    .line 766
     :cond_a
     sget-object p1, Lcn/kuwo/base/log/LogDef$FeatureLogType;->MYCHANNEL:Lcn/kuwo/base/log/LogDef$FeatureLogType;
 
@@ -1522,10 +1596,10 @@
 
     move-result-object p1
 
-    invoke-static {p1, v0}, Lcn/kuwo/base/log/FeatureLogger;->sendFeatureLog(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-static {p1, v0}, Lcn/kuwo/base/log/g;->a(Ljava/lang/String;Ljava/lang/String;)V
 
-    .line 819
-    invoke-static {}, Lcn/kuwo/core/modulemgr/ModMgr;->getMobileAdMgr()Lcn/kuwo/mod/mobilead/IAdMgr;
+    .line 767
+    invoke-static {}, Lcn/kuwo/core/modulemgr/b;->s()Lcn/kuwo/mod/mobilead/IAdMgr;
 
     move-result-object p1
 
@@ -1540,30 +1614,30 @@
     :cond_20
     const-string p1, "fx_livehome_tab_entry_click"
 
-    .line 828
+    .line 776
     invoke-static {p1}, Lcn/kuwo/show/music/utils/FanXingLog;->onEvent(Ljava/lang/String;)V
 
     goto :goto_36
 
-    .line 822
+    .line 770
     :cond_26
     iget-boolean p1, p0, Lcn/kuwo/ui/fragment/MainController;->isAuto:Z
 
     if-nez p1, :cond_33
 
-    .line 823
+    .line 771
     sget-object p1, Lcn/kuwo/base/log/LogDef$FeatureLogType;->RECOMMEND:Lcn/kuwo/base/log/LogDef$FeatureLogType;
 
     invoke-virtual {p1}, Lcn/kuwo/base/log/LogDef$FeatureLogType;->toString()Ljava/lang/String;
 
     move-result-object p1
 
-    invoke-static {p1, v0}, Lcn/kuwo/base/log/FeatureLogger;->sendFeatureLog(Ljava/lang/String;Ljava/lang/String;)V
+    invoke-static {p1, v0}, Lcn/kuwo/base/log/g;->a(Ljava/lang/String;Ljava/lang/String;)V
 
     :cond_33
     const/4 p1, 0x0
 
-    .line 825
+    .line 773
     iput-boolean p1, p0, Lcn/kuwo/ui/fragment/MainController;->isAuto:Z
 
     :goto_36
@@ -1573,8 +1647,8 @@
 .method private sendMusicPauseLog()V
     .registers 6
 
-    .line 1535
-    invoke-static {}, Lcn/kuwo/core/modulemgr/ModMgr;->getPlayControl()Lcn/kuwo/mod/playcontrol/IPlayControl;
+    .line 1508
+    invoke-static {}, Lcn/kuwo/core/modulemgr/b;->q()Lcn/kuwo/mod/playcontrol/IPlayControl;
 
     move-result-object v0
 
@@ -1586,9 +1660,9 @@
 
     return-void
 
-    .line 1539
+    .line 1512
     :cond_b
-    invoke-static {}, Lcn/kuwo/core/modulemgr/ModMgr;->getPlayControl()Lcn/kuwo/mod/playcontrol/IPlayControl;
+    invoke-static {}, Lcn/kuwo/core/modulemgr/b;->q()Lcn/kuwo/mod/playcontrol/IPlayControl;
 
     move-result-object v1
 
@@ -1606,14 +1680,14 @@
 
     move-result v1
 
-    .line 1540
+    .line 1513
     new-instance v2, Ljava/lang/StringBuilder;
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
     const-string v3, "RID:"
 
-    .line 1541
+    .line 1514
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     iget-wide v3, v0, Lcn/kuwo/base/bean/Music;->rid:J
@@ -1622,12 +1696,12 @@
 
     const-string/jumbo v0, "|PT:"
 
-    .line 1542
+    .line 1515
     invoke-virtual {v2, v0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
 
-    .line 1543
+    .line 1516
     sget-object v0, Lcn/kuwo/base/log/LogDef$LogType;->M_PAUSE:Lcn/kuwo/base/log/LogDef$LogType;
 
     invoke-virtual {v0}, Lcn/kuwo/base/log/LogDef$LogType;->toString()Ljava/lang/String;
@@ -1640,16 +1714,16 @@
 
     const/4 v2, 0x0
 
-    invoke-static {v0, v1, v2}, Lcn/kuwo/base/log/LogMgr;->logRealMsg(Ljava/lang/String;Ljava/lang/String;I)Z
+    invoke-static {v0, v1, v2}, Lcn/kuwo/base/log/i;->a(Ljava/lang/String;Ljava/lang/String;I)Z
 
     return-void
 .end method
 
 .method private setShowRedVisible()V
-    .registers 7
+    .registers 8
 
-    .line 729
-    invoke-static {}, Lcn/kuwo/core/modulemgr/ModMgr;->getShieldMgr()Lcn/kuwo/mod/shield/IShieldMgr;
+    .line 685
+    invoke-static {}, Lcn/kuwo/core/modulemgr/b;->y()Lcn/kuwo/mod/shield/IShieldMgr;
 
     move-result-object v0
 
@@ -1661,9 +1735,9 @@
 
     return-void
 
-    .line 733
+    .line 689
     :cond_b
-    invoke-virtual {v0}, Lcn/kuwo/base/bean/ShieldInfo;->getTabShowShieldInfo()Lcn/kuwo/base/bean/shieldadinfo/RedTabShowShieldInfo;
+    invoke-virtual {v0}, Lcn/kuwo/base/bean/ShieldInfo;->aE()Lcn/kuwo/base/bean/shieldadinfo/RedTabShowShieldInfo;
 
     move-result-object v0
 
@@ -1671,7 +1745,7 @@
 
     return-void
 
-    .line 737
+    .line 693
     :cond_12
     new-instance v1, Lcn/kuwo/base/utils/KwDate;
 
@@ -1681,12 +1755,12 @@
 
     move-result-object v1
 
-    .line 738
+    .line 694
     invoke-virtual {v0}, Lcn/kuwo/base/bean/shieldadinfo/RedTabShowShieldInfo;->getTipTime()Ljava/lang/String;
 
     move-result-object v2
 
-    .line 739
+    .line 695
     invoke-virtual {v0}, Lcn/kuwo/base/bean/shieldadinfo/RedTabShowShieldInfo;->getTipTimeHour()Ljava/lang/String;
 
     move-result-object v3
@@ -1695,25 +1769,25 @@
 
     const-string/jumbo v5, "tab_show_red_time"
 
-    .line 740
-    invoke-static {v4, v5, v4}, Lcn/kuwo/base/config/ConfMgr;->getStringValue(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    .line 696
+    invoke-static {v4, v5, v4}, Lcn/kuwo/base/config/c;->a(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v4
 
-    .line 742
+    .line 698
     invoke-static {v2}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
 
     move-result v5
 
-    if-nez v5, :cond_9b
+    if-nez v5, :cond_9a
 
     invoke-virtual {v2, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
 
     move-result v2
 
-    if-eqz v2, :cond_9b
+    if-eqz v2, :cond_9a
 
-    .line 743
+    .line 699
     invoke-static {v4}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
 
     move-result v2
@@ -1724,12 +1798,12 @@
 
     move-result v1
 
-    if-nez v1, :cond_9b
+    if-nez v1, :cond_9a
 
     :cond_44
     const/4 v1, 0x0
 
-    .line 745
+    .line 701
     invoke-static {v3}, Landroid/text/TextUtils;->isEmpty(Ljava/lang/CharSequence;)Z
 
     move-result v2
@@ -1738,7 +1812,7 @@
 
     const-string v1, ";"
 
-    .line 746
+    .line 702
     invoke-virtual {v3, v1}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
 
     move-result-object v1
@@ -1746,32 +1820,32 @@
     :cond_51
     const/4 v2, 0x1
 
-    const/4 v3, 0x0
+    const/4 v3, 0x2
+
+    const/4 v4, 0x0
 
     if-eqz v1, :cond_76
 
-    .line 750
-    array-length v4, v1
+    .line 706
+    array-length v5, v1
 
-    const/4 v5, 0x2
+    if-ne v5, v3, :cond_76
 
-    if-ne v4, v5, :cond_76
-
-    .line 752
+    .line 708
     :try_start_59
-    aget-object v4, v1, v3
+    aget-object v5, v1, v4
 
-    invoke-static {v4}, Ljava/lang/Integer;->valueOf(Ljava/lang/String;)Ljava/lang/Integer;
+    invoke-static {v5}, Ljava/lang/Integer;->valueOf(Ljava/lang/String;)Ljava/lang/Integer;
 
-    move-result-object v4
+    move-result-object v5
 
-    invoke-virtual {v4}, Ljava/lang/Integer;->intValue()I
+    invoke-virtual {v5}, Ljava/lang/Integer;->intValue()I
 
-    move-result v4
+    move-result v5
     :try_end_63
     .catch Ljava/lang/NumberFormatException; {:try_start_59 .. :try_end_63} :catch_70
 
-    .line 753
+    .line 709
     :try_start_63
     aget-object v1, v1, v2
 
@@ -1781,7 +1855,7 @@
 
     invoke-virtual {v1}, Ljava/lang/Integer;->intValue()I
 
-    move-result v3
+    move-result v4
     :try_end_6d
     .catch Ljava/lang/NumberFormatException; {:try_start_63 .. :try_end_6d} :catch_6e
 
@@ -1795,77 +1869,75 @@
     :catch_70
     move-exception v1
 
-    const/4 v4, 0x0
+    const/4 v5, 0x0
 
-    .line 755
+    .line 711
     :goto_72
     invoke-virtual {v1}, Ljava/lang/NumberFormatException;->printStackTrace()V
 
     goto :goto_77
 
     :cond_76
-    const/4 v4, 0x0
+    const/4 v5, 0x0
 
-    .line 758
+    .line 714
     :goto_77
     invoke-static {}, Ljava/util/Calendar;->getInstance()Ljava/util/Calendar;
 
     move-result-object v1
 
-    const/16 v5, 0xb
+    const/16 v6, 0xb
 
-    .line 759
-    invoke-virtual {v1, v5}, Ljava/util/Calendar;->get(I)I
+    .line 715
+    invoke-virtual {v1, v6}, Ljava/util/Calendar;->get(I)I
 
     move-result v1
 
-    if-lt v1, v4, :cond_9b
+    if-lt v1, v5, :cond_9a
 
-    if-gt v1, v3, :cond_9b
+    if-gt v1, v4, :cond_9a
 
-    .line 761
+    .line 717
     invoke-virtual {v0}, Lcn/kuwo/base/bean/shieldadinfo/RedTabShowShieldInfo;->getType()I
 
     move-result v1
 
-    const/4 v3, 0x3
+    if-ne v1, v2, :cond_91
 
-    if-ne v1, v2, :cond_92
-
-    .line 762
+    .line 718
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
-    invoke-virtual {v0, v3}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->showRedDot(I)V
+    invoke-virtual {v0, v3}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->setRedDot(I)V
 
-    goto :goto_9b
+    goto :goto_9a
 
-    .line 764
-    :cond_92
+    .line 720
+    :cond_91
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
     invoke-virtual {v0}, Lcn/kuwo/base/bean/shieldadinfo/RedTabShowShieldInfo;->getText()Ljava/lang/String;
 
     move-result-object v0
 
-    invoke-virtual {v1, v3, v0}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->showTextTag(ILjava/lang/String;)V
+    invoke-virtual {v1, v3, v0}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->setTipText(ILjava/lang/String;)V
 
-    :cond_9b
-    :goto_9b
+    :cond_9a
+    :goto_9a
     return-void
 .end method
 
 .method private showFreeModeInterstitialAd(I)V
     .registers 3
 
-    .line 1495
-    sget-boolean v0, Lcn/kuwo/player/screen/ScreenAdUtils;->isInitScreenAdExpose:Z
+    .line 1468
+    sget-boolean v0, Lcn/kuwo/player/screen/d;->a:Z
 
     if-eqz v0, :cond_8
 
     const/4 p1, 0x0
 
-    .line 1496
-    sput-boolean p1, Lcn/kuwo/player/screen/ScreenAdUtils;->isInitScreenAdExpose:Z
+    .line 1469
+    sput-boolean p1, Lcn/kuwo/player/screen/d;->a:Z
 
     return-void
 
@@ -1874,8 +1946,8 @@
 
     if-nez p1, :cond_13
 
-    .line 1500
-    invoke-static {}, Lcn/kuwo/core/modulemgr/ModMgr;->getFreeModeInterstitialAdMgr()Lcn/kuwo/mod/mobilead/tmead/interstitial/freemode/IFreeModeInterstitialAdMgr;
+    .line 1473
+    invoke-static {}, Lcn/kuwo/core/modulemgr/b;->av()Lcn/kuwo/mod/mobilead/tmead/interstitial/freemode/IFreeModeInterstitialAdMgr;
 
     move-result-object p1
 
@@ -1886,8 +1958,8 @@
     :cond_13
     if-ne p1, v0, :cond_1d
 
-    .line 1502
-    invoke-static {}, Lcn/kuwo/core/modulemgr/ModMgr;->getFreeModeInterstitialAdMgr()Lcn/kuwo/mod/mobilead/tmead/interstitial/freemode/IFreeModeInterstitialAdMgr;
+    .line 1475
+    invoke-static {}, Lcn/kuwo/core/modulemgr/b;->av()Lcn/kuwo/mod/mobilead/tmead/interstitial/freemode/IFreeModeInterstitialAdMgr;
 
     move-result-object p1
 
@@ -1903,84 +1975,30 @@
 .method private showPlayBarWithCheck()V
     .registers 3
 
-    .line 962
+    .line 921
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     const/4 v1, 0x0
 
     invoke-virtual {v0, v1}, Landroid/view/View;->setVisibility(I)V
 
-    .line 964
-    sget v0, Lcn/kuwo/ui/fragment/MainController;->tabIndex:I
-
-    const/4 v1, 0x2
-
-    if-ne v0, v1, :cond_2c
-
-    invoke-static {}, Lcn/kuwo/base/fragment/FragmentOperation;->getInstance()Lcn/kuwo/base/fragment/FragmentOperation;
+    .line 923
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object v0
 
-    invoke-virtual {v0}, Lcn/kuwo/base/fragment/FragmentOperation;->isMainLayerShow()Z
-
-    move-result v0
-
-    if-eqz v0, :cond_2c
-
-    .line 965
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->getMiniPlayController()Lcn/kuwo/ui/fragment/MiniPlayController;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Lcn/kuwo/ui/fragment/MiniPlayController;->resetMiniPlayBarCollapse()V
-
-    .line 966
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->getMiniPlayController()Lcn/kuwo/ui/fragment/MiniPlayController;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Lcn/kuwo/ui/fragment/MiniPlayController;->hideHalfBg()V
-
-    goto :goto_42
-
-    .line 968
-    :cond_2c
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->getMiniPlayController()Lcn/kuwo/ui/fragment/MiniPlayController;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Lcn/kuwo/ui/fragment/MiniPlayController;->resetMiniPlayBarExpand()V
-
-    .line 970
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->getMiniPlayController()Lcn/kuwo/ui/fragment/MiniPlayController;
+    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->j()Lcn/kuwo/ui/fragment/MiniPlayController;
 
     move-result-object v0
 
     invoke-virtual {v0}, Lcn/kuwo/ui/fragment/MiniPlayController;->showHalfBg()V
 
-    .line 973
-    :goto_42
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    .line 925
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object v0
 
-    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->getMiniPlayController()Lcn/kuwo/ui/fragment/MiniPlayController;
+    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->j()Lcn/kuwo/ui/fragment/MiniPlayController;
 
     move-result-object v0
 
@@ -1994,7 +2012,7 @@
 .method public debugStackShow(Z)V
     .registers 3
 
-    .line 1597
+    .line 1570
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mDebugView:Landroid/view/View;
 
     if-eqz v0, :cond_d
@@ -2008,7 +2026,7 @@
     :cond_8
     const/16 p1, 0x8
 
-    .line 1598
+    .line 1571
     :goto_a
     invoke-virtual {v0, p1}, Landroid/view/View;->setVisibility(I)V
 
@@ -2019,7 +2037,7 @@
 .method public getBottomBarVisibility()Z
     .registers 3
 
-    .line 909
+    .line 868
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     const/4 v1, 0x0
@@ -2028,7 +2046,7 @@
 
     return v1
 
-    .line 912
+    .line 871
     :cond_6
     invoke-virtual {v0}, Landroid/view/View;->getVisibility()I
 
@@ -2045,16 +2063,67 @@
 .method public getCarPop()Lcn/kuwo/ui/fragment/PopModule;
     .registers 2
 
-    .line 233
+    .line 214
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->module:Lcn/kuwo/ui/fragment/PopModule;
 
     return-object v0
 .end method
 
+.method public getChooseTab(I)Landroidx/fragment/app/Fragment;
+    .registers 4
+
+    .line 810
+    iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
+
+    const/4 v1, 0x0
+
+    if-eqz v0, :cond_22
+
+    iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mAdapter:Lcn/kuwo/ui/fragment/HomePageAdapter;
+
+    if-eqz v0, :cond_22
+
+    invoke-virtual {v0}, Lcn/kuwo/ui/fragment/HomePageAdapter;->getCount()I
+
+    move-result v0
+
+    if-gtz v0, :cond_10
+
+    goto :goto_22
+
+    .line 813
+    :cond_10
+    iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mAdapter:Lcn/kuwo/ui/fragment/HomePageAdapter;
+
+    invoke-virtual {v0}, Lcn/kuwo/ui/fragment/HomePageAdapter;->getCount()I
+
+    move-result v0
+
+    add-int/lit8 v0, v0, -0x1
+
+    if-le p1, v0, :cond_1b
+
+    return-object v1
+
+    .line 816
+    :cond_1b
+    iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mAdapter:Lcn/kuwo/ui/fragment/HomePageAdapter;
+
+    invoke-virtual {v0, p1}, Lcn/kuwo/ui/fragment/HomePageAdapter;->getFragment(I)Landroidx/fragment/app/Fragment;
+
+    move-result-object p1
+
+    return-object p1
+
+    :cond_22
+    :goto_22
+    return-object v1
+.end method
+
 .method public getCurrentTab()Landroidx/fragment/app/Fragment;
     .registers 3
 
-    .line 855
+    .line 803
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
     if-eqz v0, :cond_1c
@@ -2071,7 +2140,7 @@
 
     goto :goto_1c
 
-    .line 858
+    .line 806
     :cond_f
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mAdapter:Lcn/kuwo/ui/fragment/HomePageAdapter;
 
@@ -2097,12 +2166,12 @@
 .method public getCurrentTabIndex()I
     .registers 2
 
-    .line 865
+    .line 823
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
     if-eqz v0, :cond_9
 
-    .line 866
+    .line 824
     invoke-virtual {v0}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->getCurrentIndex()I
 
     move-result v0
@@ -2118,7 +2187,7 @@
 .method public getTabRedTipManager()Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabRedTipManager;
     .registers 2
 
-    .line 254
+    .line 235
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mTabRedTipManager:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabRedTipManager;
 
     return-object v0
@@ -2127,16 +2196,16 @@
 .method public handleBackHome()V
     .registers 10
 
-    .line 1136
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    .line 1107
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object v0
 
     const/4 v1, 0x0
 
-    invoke-virtual {v0, v1}, Lcn/kuwo/player/activities/MainActivity;->refreshVipView(Z)V
+    invoke-virtual {v0, v1}, Lcn/kuwo/player/activities/MainActivity;->a(Z)V
 
-    .line 1138
+    .line 1109
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
     const/4 v2, 0x2
@@ -2161,7 +2230,7 @@
 
     move-result-object v0
 
-    .line 1139
+    .line 1113
     iget-object v3, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     new-array v7, v2, [F
@@ -2178,27 +2247,27 @@
 
     move-result-object v3
 
-    .line 1140
+    .line 1117
     new-instance v4, Landroid/animation/AnimatorSet;
 
     invoke-direct {v4}, Landroid/animation/AnimatorSet;-><init>()V
 
-    .line 1141
-    new-instance v6, Lcn/kuwo/ui/fragment/MainController$19;
+    .line 1118
+    new-instance v6, Lcn/kuwo/ui/fragment/MainController$20;
 
-    invoke-direct {v6, p0}, Lcn/kuwo/ui/fragment/MainController$19;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
+    invoke-direct {v6, p0}, Lcn/kuwo/ui/fragment/MainController$20;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
     invoke-virtual {v4, v6}, Landroid/animation/AnimatorSet;->addListener(Landroid/animation/Animator$AnimatorListener;)V
 
-    .line 1160
+    .line 1131
     iput-boolean v5, p0, Lcn/kuwo/ui/fragment/MainController;->isBottomLayoutShow:Z
 
     const-wide/16 v6, 0xc8
 
-    .line 1161
+    .line 1132
     invoke-virtual {v4, v6, v7}, Landroid/animation/AnimatorSet;->setDuration(J)Landroid/animation/AnimatorSet;
 
-    .line 1162
+    .line 1133
     new-instance v6, Landroid/view/animation/AccelerateInterpolator;
 
     invoke-direct {v6}, Landroid/view/animation/AccelerateInterpolator;-><init>()V
@@ -2211,10 +2280,10 @@
 
     aput-object v3, v2, v5
 
-    .line 1163
+    .line 1134
     invoke-virtual {v4, v2}, Landroid/animation/AnimatorSet;->playTogether([Landroid/animation/Animator;)V
 
-    .line 1164
+    .line 1135
     invoke-virtual {v4}, Landroid/animation/AnimatorSet;->start()V
 
     return-void
@@ -2223,23 +2292,23 @@
 .method public handleFullBackFull()V
     .registers 6
 
-    .line 1078
-    invoke-static {}, Lcn/kuwo/base/fragment/FragmentOperation;->getInstance()Lcn/kuwo/base/fragment/FragmentOperation;
+    .line 1043
+    invoke-static {}, Lcn/kuwo/base/fragment/b;->getInstance()Lcn/kuwo/base/fragment/b;
 
     move-result-object v0
 
-    invoke-virtual {v0}, Lcn/kuwo/base/fragment/FragmentOperation;->getTopFragment()Landroidx/fragment/app/Fragment;
+    invoke-virtual {v0}, Lcn/kuwo/base/fragment/b;->getTopFragment()Landroidx/fragment/app/Fragment;
 
     move-result-object v0
 
-    .line 1079
+    .line 1044
     instance-of v1, v0, Lcn/kuwo/mod/nowplay/container/PlayPageContainer;
 
     const/16 v2, 0x8
 
     if-eqz v1, :cond_4f
 
-    .line 1080
+    .line 1045
     check-cast v0, Lcn/kuwo/mod/nowplay/container/PlayPageContainer;
 
     invoke-virtual {v0}, Lcn/kuwo/mod/nowplay/container/PlayPageContainer;->isSimilarFragmentShow()Z
@@ -2248,7 +2317,7 @@
 
     if-eqz v0, :cond_4f
 
-    .line 1082
+    .line 1047
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     invoke-virtual {v0}, Landroid/view/View;->getVisibility()I
@@ -2257,7 +2326,7 @@
 
     if-ne v0, v2, :cond_4e
 
-    .line 1083
+    .line 1048
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     const/4 v1, 0x2
@@ -2286,32 +2355,32 @@
 
     move-result-object v0
 
-    .line 1084
-    new-instance v1, Lcn/kuwo/ui/fragment/MainController$17;
+    .line 1052
+    new-instance v1, Lcn/kuwo/ui/fragment/MainController$18;
 
-    invoke-direct {v1, p0}, Lcn/kuwo/ui/fragment/MainController$17;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
+    invoke-direct {v1, p0}, Lcn/kuwo/ui/fragment/MainController$18;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
     invoke-virtual {v0, v1}, Landroid/animation/ObjectAnimator;->addListener(Landroid/animation/Animator$AnimatorListener;)V
 
     const-wide/16 v1, 0xc8
 
-    .line 1092
+    .line 1060
     invoke-virtual {v0, v1, v2}, Landroid/animation/ObjectAnimator;->setDuration(J)Landroid/animation/ObjectAnimator;
 
-    .line 1093
+    .line 1061
     new-instance v1, Landroid/view/animation/AccelerateInterpolator;
 
     invoke-direct {v1}, Landroid/view/animation/AccelerateInterpolator;-><init>()V
 
     invoke-virtual {v0, v1}, Landroid/animation/ObjectAnimator;->setInterpolator(Landroid/animation/TimeInterpolator;)V
 
-    .line 1094
+    .line 1062
     invoke-virtual {v0}, Landroid/animation/ObjectAnimator;->start()V
 
     :cond_4e
     return-void
 
-    .line 1099
+    .line 1067
     :cond_4f
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
@@ -2321,7 +2390,7 @@
 
     if-nez v0, :cond_5c
 
-    .line 1100
+    .line 1068
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     invoke-virtual {v0, v2}, Landroid/view/View;->setVisibility(I)V
@@ -2333,7 +2402,7 @@
 .method public handleFullBackSub()V
     .registers 6
 
-    .line 1115
+    .line 1083
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     invoke-virtual {v0}, Landroid/view/View;->getVisibility()I
@@ -2342,12 +2411,12 @@
 
     if-nez v0, :cond_14
 
-    .line 1117
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    .line 1085
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object v0
 
-    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->getMiniPlayController()Lcn/kuwo/ui/fragment/MiniPlayController;
+    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->j()Lcn/kuwo/ui/fragment/MiniPlayController;
 
     move-result-object v0
 
@@ -2355,7 +2424,7 @@
 
     return-void
 
-    .line 1120
+    .line 1088
     :cond_14
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
@@ -2385,26 +2454,26 @@
 
     move-result-object v0
 
-    .line 1121
-    new-instance v1, Lcn/kuwo/ui/fragment/MainController$18;
+    .line 1092
+    new-instance v1, Lcn/kuwo/ui/fragment/MainController$19;
 
-    invoke-direct {v1, p0}, Lcn/kuwo/ui/fragment/MainController$18;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
+    invoke-direct {v1, p0}, Lcn/kuwo/ui/fragment/MainController$19;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
     invoke-virtual {v0, v1}, Landroid/animation/ObjectAnimator;->addListener(Landroid/animation/Animator$AnimatorListener;)V
 
     const-wide/16 v1, 0xc8
 
-    .line 1129
+    .line 1100
     invoke-virtual {v0, v1, v2}, Landroid/animation/ObjectAnimator;->setDuration(J)Landroid/animation/ObjectAnimator;
 
-    .line 1130
+    .line 1101
     new-instance v1, Landroid/view/animation/AccelerateInterpolator;
 
     invoke-direct {v1}, Landroid/view/animation/AccelerateInterpolator;-><init>()V
 
     invoke-virtual {v0, v1}, Landroid/animation/ObjectAnimator;->setInterpolator(Landroid/animation/TimeInterpolator;)V
 
-    .line 1131
+    .line 1102
     invoke-virtual {v0}, Landroid/animation/ObjectAnimator;->start()V
 
     return-void
@@ -2413,7 +2482,7 @@
 .method public handleFullToFull()V
     .registers 3
 
-    .line 1046
+    .line 1026
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     invoke-virtual {v0}, Landroid/view/View;->getVisibility()I
@@ -2422,7 +2491,7 @@
 
     if-nez v0, :cond_f
 
-    .line 1047
+    .line 1027
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     const/16 v1, 0x8
@@ -2436,7 +2505,7 @@
 .method public handleFullToSub()V
     .registers 6
 
-    .line 1000
+    .line 958
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     invoke-virtual {v0}, Landroid/view/View;->getVisibility()I
@@ -2445,12 +2514,12 @@
 
     if-nez v0, :cond_14
 
-    .line 1002
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    .line 960
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object v0
 
-    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->getMiniPlayController()Lcn/kuwo/ui/fragment/MiniPlayController;
+    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->j()Lcn/kuwo/ui/fragment/MiniPlayController;
 
     move-result-object v0
 
@@ -2458,7 +2527,7 @@
 
     return-void
 
-    .line 1005
+    .line 963
     :cond_14
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
@@ -2488,26 +2557,26 @@
 
     move-result-object v0
 
-    .line 1006
-    new-instance v1, Lcn/kuwo/ui/fragment/MainController$15;
+    .line 967
+    new-instance v1, Lcn/kuwo/ui/fragment/MainController$16;
 
-    invoke-direct {v1, p0}, Lcn/kuwo/ui/fragment/MainController$15;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
+    invoke-direct {v1, p0}, Lcn/kuwo/ui/fragment/MainController$16;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
     invoke-virtual {v0, v1}, Landroid/animation/ObjectAnimator;->addListener(Landroid/animation/Animator$AnimatorListener;)V
 
     const-wide/16 v1, 0xc8
 
-    .line 1014
+    .line 975
     invoke-virtual {v0, v1, v2}, Landroid/animation/ObjectAnimator;->setDuration(J)Landroid/animation/ObjectAnimator;
 
-    .line 1015
+    .line 976
     new-instance v1, Landroid/view/animation/AccelerateInterpolator;
 
     invoke-direct {v1}, Landroid/view/animation/AccelerateInterpolator;-><init>()V
 
     invoke-virtual {v0, v1}, Landroid/animation/ObjectAnimator;->setInterpolator(Landroid/animation/TimeInterpolator;)V
 
-    .line 1016
+    .line 977
     invoke-virtual {v0}, Landroid/animation/ObjectAnimator;->start()V
 
     return-void
@@ -2516,7 +2585,7 @@
 .method public handleHomeToFull()V
     .registers 9
 
-    .line 1021
+    .line 982
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
     const/4 v1, 0x2
@@ -2543,7 +2612,7 @@
 
     move-result-object v0
 
-    .line 1022
+    .line 986
     iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     new-array v7, v1, [F
@@ -2560,19 +2629,19 @@
 
     move-result-object v2
 
-    .line 1023
+    .line 990
     new-instance v3, Landroid/animation/AnimatorSet;
 
     invoke-direct {v3}, Landroid/animation/AnimatorSet;-><init>()V
 
-    .line 1024
-    new-instance v5, Lcn/kuwo/ui/fragment/MainController$16;
+    .line 991
+    new-instance v5, Lcn/kuwo/ui/fragment/MainController$17;
 
-    invoke-direct {v5, p0}, Lcn/kuwo/ui/fragment/MainController$16;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
+    invoke-direct {v5, p0}, Lcn/kuwo/ui/fragment/MainController$17;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
     invoke-virtual {v3, v5}, Landroid/animation/AnimatorSet;->addListener(Landroid/animation/Animator$AnimatorListener;)V
 
-    .line 1032
+    .line 999
     iput-boolean v4, p0, Lcn/kuwo/ui/fragment/MainController;->isBottomLayoutShow:Z
 
     new-array v1, v1, [Landroid/animation/Animator;
@@ -2581,22 +2650,22 @@
 
     aput-object v2, v1, v6
 
-    .line 1033
+    .line 1000
     invoke-virtual {v3, v1}, Landroid/animation/AnimatorSet;->playTogether([Landroid/animation/Animator;)V
 
     const-wide/16 v0, 0xc8
 
-    .line 1034
+    .line 1001
     invoke-virtual {v3, v0, v1}, Landroid/animation/AnimatorSet;->setDuration(J)Landroid/animation/AnimatorSet;
 
-    .line 1035
+    .line 1002
     new-instance v0, Landroid/view/animation/AccelerateInterpolator;
 
     invoke-direct {v0}, Landroid/view/animation/AccelerateInterpolator;-><init>()V
 
     invoke-virtual {v3, v0}, Landroid/animation/AnimatorSet;->setInterpolator(Landroid/animation/TimeInterpolator;)V
 
-    .line 1036
+    .line 1003
     invoke-virtual {v3}, Landroid/animation/AnimatorSet;->start()V
 
     return-void
@@ -2605,7 +2674,7 @@
 .method public handleHomeToSub()V
     .registers 9
 
-    .line 979
+    .line 931
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
     const/4 v1, 0x2
@@ -2632,7 +2701,7 @@
 
     move-result-object v0
 
-    .line 980
+    .line 935
     iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     new-array v7, v1, [F
@@ -2649,19 +2718,19 @@
 
     move-result-object v2
 
-    .line 981
+    .line 939
     new-instance v3, Landroid/animation/AnimatorSet;
 
     invoke-direct {v3}, Landroid/animation/AnimatorSet;-><init>()V
 
-    .line 982
-    new-instance v5, Lcn/kuwo/ui/fragment/MainController$14;
+    .line 940
+    new-instance v5, Lcn/kuwo/ui/fragment/MainController$15;
 
-    invoke-direct {v5, p0}, Lcn/kuwo/ui/fragment/MainController$14;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
+    invoke-direct {v5, p0}, Lcn/kuwo/ui/fragment/MainController$15;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
     invoke-virtual {v3, v5}, Landroid/animation/AnimatorSet;->addListener(Landroid/animation/Animator$AnimatorListener;)V
 
-    .line 991
+    .line 949
     iput-boolean v4, p0, Lcn/kuwo/ui/fragment/MainController;->isBottomLayoutShow:Z
 
     new-array v1, v1, [Landroid/animation/Animator;
@@ -2670,22 +2739,22 @@
 
     aput-object v2, v1, v6
 
-    .line 992
+    .line 950
     invoke-virtual {v3, v1}, Landroid/animation/AnimatorSet;->playTogether([Landroid/animation/Animator;)V
 
     const-wide/16 v0, 0xc8
 
-    .line 993
+    .line 951
     invoke-virtual {v3, v0, v1}, Landroid/animation/AnimatorSet;->setDuration(J)Landroid/animation/AnimatorSet;
 
-    .line 994
+    .line 952
     new-instance v0, Landroid/view/animation/AccelerateInterpolator;
 
     invoke-direct {v0}, Landroid/view/animation/AccelerateInterpolator;-><init>()V
 
     invoke-virtual {v3, v0}, Landroid/animation/AnimatorSet;->setInterpolator(Landroid/animation/TimeInterpolator;)V
 
-    .line 995
+    .line 953
     invoke-virtual {v3}, Landroid/animation/AnimatorSet;->start()V
 
     return-void
@@ -2694,8 +2763,8 @@
 .method public handlePlayPageHideMiniBar()V
     .registers 7
 
-    .line 1212
-    invoke-static {}, Lcn/kuwo/base/utils/DeviceInfo;->isFoldStates()Z
+    .line 1177
+    invoke-static {}, Lcn/kuwo/base/utils/j;->p()Z
 
     move-result v0
 
@@ -2703,7 +2772,7 @@
 
     return-void
 
-    .line 1216
+    .line 1181
     :cond_7
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
@@ -2719,7 +2788,7 @@
 
     if-eqz v0, :cond_1c
 
-    .line 1217
+    .line 1182
     invoke-virtual {v0}, Landroid/animation/ObjectAnimator;->isRunning()Z
 
     move-result v0
@@ -2728,7 +2797,7 @@
 
     goto :goto_56
 
-    .line 1220
+    .line 1185
     :cond_1c
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
@@ -2760,23 +2829,23 @@
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPPHideAnimator:Landroid/animation/ObjectAnimator;
 
-    .line 1221
+    .line 1189
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPPHideAnimator:Landroid/animation/ObjectAnimator;
 
-    new-instance v1, Lcn/kuwo/ui/fragment/MainController$21;
+    new-instance v1, Lcn/kuwo/ui/fragment/MainController$22;
 
-    invoke-direct {v1, p0}, Lcn/kuwo/ui/fragment/MainController$21;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
+    invoke-direct {v1, p0}, Lcn/kuwo/ui/fragment/MainController$22;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
     invoke-virtual {v0, v1}, Landroid/animation/ObjectAnimator;->addListener(Landroid/animation/Animator$AnimatorListener;)V
 
-    .line 1228
+    .line 1196
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPPHideAnimator:Landroid/animation/ObjectAnimator;
 
     const-wide/16 v1, 0xc8
 
     invoke-virtual {v0, v1, v2}, Landroid/animation/ObjectAnimator;->setDuration(J)Landroid/animation/ObjectAnimator;
 
-    .line 1229
+    .line 1197
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPPHideAnimator:Landroid/animation/ObjectAnimator;
 
     new-instance v1, Landroid/view/animation/AccelerateInterpolator;
@@ -2785,7 +2854,7 @@
 
     invoke-virtual {v0, v1}, Landroid/animation/ObjectAnimator;->setInterpolator(Landroid/animation/TimeInterpolator;)V
 
-    .line 1230
+    .line 1198
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPPHideAnimator:Landroid/animation/ObjectAnimator;
 
     invoke-virtual {v0}, Landroid/animation/ObjectAnimator;->start()V
@@ -2798,8 +2867,8 @@
 .method public handlePlayPageShowMiniBar()V
     .registers 6
 
-    .line 1186
-    invoke-static {}, Lcn/kuwo/base/utils/DeviceInfo;->isFoldStates()Z
+    .line 1148
+    invoke-static {}, Lcn/kuwo/base/utils/j;->p()Z
 
     move-result v0
 
@@ -2807,7 +2876,7 @@
 
     return-void
 
-    .line 1190
+    .line 1152
     :cond_7
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
@@ -2821,7 +2890,7 @@
 
     if-eqz v0, :cond_1a
 
-    .line 1191
+    .line 1153
     invoke-virtual {v0}, Landroid/animation/ObjectAnimator;->isRunning()Z
 
     move-result v0
@@ -2830,7 +2899,7 @@
 
     goto :goto_54
 
-    .line 1194
+    .line 1156
     :cond_1a
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
@@ -2862,23 +2931,23 @@
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPPShowAnimator:Landroid/animation/ObjectAnimator;
 
-    .line 1195
+    .line 1160
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPPShowAnimator:Landroid/animation/ObjectAnimator;
 
-    new-instance v1, Lcn/kuwo/ui/fragment/MainController$20;
+    new-instance v1, Lcn/kuwo/ui/fragment/MainController$21;
 
-    invoke-direct {v1, p0}, Lcn/kuwo/ui/fragment/MainController$20;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
+    invoke-direct {v1, p0}, Lcn/kuwo/ui/fragment/MainController$21;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
     invoke-virtual {v0, v1}, Landroid/animation/ObjectAnimator;->addListener(Landroid/animation/Animator$AnimatorListener;)V
 
-    .line 1205
+    .line 1170
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPPShowAnimator:Landroid/animation/ObjectAnimator;
 
     const-wide/16 v1, 0xc8
 
     invoke-virtual {v0, v1, v2}, Landroid/animation/ObjectAnimator;->setDuration(J)Landroid/animation/ObjectAnimator;
 
-    .line 1206
+    .line 1171
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPPShowAnimator:Landroid/animation/ObjectAnimator;
 
     new-instance v1, Landroid/view/animation/AccelerateInterpolator;
@@ -2887,7 +2956,7 @@
 
     invoke-virtual {v0, v1}, Landroid/animation/ObjectAnimator;->setInterpolator(Landroid/animation/TimeInterpolator;)V
 
-    .line 1207
+    .line 1172
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPPShowAnimator:Landroid/animation/ObjectAnimator;
 
     invoke-virtual {v0}, Landroid/animation/ObjectAnimator;->start()V
@@ -2900,46 +2969,35 @@
 .method public handleSubBackFull()V
     .registers 3
 
-    .line 1062
-    invoke-static {}, Lcn/kuwo/base/fragment/FragmentOperation;->getInstance()Lcn/kuwo/base/fragment/FragmentOperation;
+    .line 1014
+    invoke-static {}, Lcn/kuwo/base/fragment/b;->getInstance()Lcn/kuwo/base/fragment/b;
 
     move-result-object v0
 
-    invoke-virtual {v0}, Lcn/kuwo/base/fragment/FragmentOperation;->getTopFragment()Landroidx/fragment/app/Fragment;
+    invoke-virtual {v0}, Lcn/kuwo/base/fragment/b;->getTopFragment()Landroidx/fragment/app/Fragment;
 
     move-result-object v0
 
-    .line 1063
+    .line 1015
     instance-of v1, v0, Lcn/kuwo/mod/nowplay/container/PlayPageContainer;
 
-    if-eqz v1, :cond_2b
+    if-eqz v1, :cond_20
 
-    .line 1064
+    .line 1016
     check-cast v0, Lcn/kuwo/mod/nowplay/container/PlayPageContainer;
 
     invoke-virtual {v0}, Lcn/kuwo/mod/nowplay/container/PlayPageContainer;->isSimilarFragmentShow()Z
 
     move-result v0
 
-    if-eqz v0, :cond_2b
+    if-eqz v0, :cond_20
 
-    .line 1066
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->getMiniPlayController()Lcn/kuwo/ui/fragment/MiniPlayController;
+    .line 1017
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object v0
 
-    invoke-virtual {v0}, Lcn/kuwo/ui/fragment/MiniPlayController;->resetMiniPlayBarExpand()V
-
-    .line 1068
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->getMiniPlayController()Lcn/kuwo/ui/fragment/MiniPlayController;
+    invoke-virtual {v0}, Lcn/kuwo/player/activities/MainActivity;->j()Lcn/kuwo/ui/fragment/MiniPlayController;
 
     move-result-object v0
 
@@ -2947,8 +3005,8 @@
 
     return-void
 
-    .line 1072
-    :cond_2b
+    .line 1021
+    :cond_20
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     const/16 v1, 0x8
@@ -2961,7 +3019,7 @@
 .method public handleSubBackSub()V
     .registers 3
 
-    .line 1106
+    .line 1074
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     invoke-virtual {v0}, Landroid/view/View;->getVisibility()I
@@ -2972,10 +3030,10 @@
 
     if-ne v0, v1, :cond_13
 
-    .line 1107
+    .line 1075
     invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->showPlayBarWithCheck()V
 
-    .line 1109
+    .line 1077
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mMiniGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
     const/4 v1, 0x1
@@ -2989,7 +3047,7 @@
 .method public handleSubToFull()V
     .registers 3
 
-    .line 1041
+    .line 1008
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     const/16 v1, 0x8
@@ -3002,7 +3060,7 @@
 .method public handleSubToSub()V
     .registers 3
 
-    .line 1053
+    .line 1033
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     invoke-virtual {v0}, Landroid/view/View;->getVisibility()I
@@ -3013,10 +3071,10 @@
 
     if-ne v0, v1, :cond_13
 
-    .line 1054
+    .line 1034
     invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->showPlayBarWithCheck()V
 
-    .line 1056
+    .line 1036
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mMiniGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
     const/4 v1, 0x1
@@ -3030,51 +3088,43 @@
 .method public hideAllTip(I)V
     .registers 3
 
-    .line 598
+    .line 547
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
-    if-eqz v0, :cond_f
+    if-eqz v0, :cond_14
 
     invoke-virtual {v0}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->getChildCount()I
 
     move-result v0
 
-    if-ge p1, v0, :cond_f
+    if-ge p1, v0, :cond_14
 
-    .line 599
+    .line 548
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
-    invoke-virtual {v0, p1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->hideTagTips(I)V
+    invoke-virtual {v0, p1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->hideMessage(I)V
 
-    :cond_f
+    .line 549
+    iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
+
+    invoke-virtual {v0, p1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->hideRedDot(I)V
+
+    :cond_14
     return-void
 .end method
 
 .method public hideBottom()V
     .registers 3
 
-    .line 1168
+    .line 1139
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
     const/16 v1, 0x8
 
     invoke-virtual {v0, v1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->setVisibility(I)V
 
-    .line 1169
+    .line 1140
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
-
-    invoke-virtual {v0, v1}, Landroid/view/View;->setVisibility(I)V
-
-    return-void
-.end method
-
-.method public hideTranslateBgView()V
-    .registers 3
-
-    .line 1178
-    iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mTranslateBgView:Landroid/view/View;
-
-    const/16 v1, 0x8
 
     invoke-virtual {v0, v1}, Landroid/view/View;->setVisibility(I)V
 
@@ -3084,7 +3134,7 @@
 .method public isBottomLayoutShow()Z
     .registers 2
 
-    .line 958
+    .line 917
     iget-boolean v0, p0, Lcn/kuwo/ui/fragment/MainController;->isBottomLayoutShow:Z
 
     return v0
@@ -3093,7 +3143,7 @@
 .method public isShowingCarGuide()Z
     .registers 2
 
-    .line 916
+    .line 875
     iget-boolean v0, p0, Lcn/kuwo/ui/fragment/MainController;->isShowingCarGuide:Z
 
     return v0
@@ -3102,7 +3152,7 @@
 .method public synthetic lambda$debugStackView$0$MainController(Landroid/view/View;)V
     .registers 5
 
-    .line 1568
+    .line 1541
     :try_start_0
     new-instance v0, Lcn/kuwo/base/fragment/DebugHierarchyViewContainer;
 
@@ -3110,18 +3160,18 @@
 
     invoke-direct {v0, v1}, Lcn/kuwo/base/fragment/DebugHierarchyViewContainer;-><init>(Landroid/content/Context;)V
 
-    .line 1569
-    invoke-static {}, Lcn/kuwo/base/fragment/FragmentOperation;->getInstance()Lcn/kuwo/base/fragment/FragmentOperation;
+    .line 1542
+    invoke-static {}, Lcn/kuwo/base/fragment/b;->getInstance()Lcn/kuwo/base/fragment/b;
 
     move-result-object v1
 
-    invoke-virtual {v1}, Lcn/kuwo/base/fragment/FragmentOperation;->getDebugStack()Ljava/util/List;
+    invoke-virtual {v1}, Lcn/kuwo/base/fragment/b;->getDebugStack()Ljava/util/List;
 
     move-result-object v1
 
-    invoke-virtual {v0, v1}, Lcn/kuwo/base/fragment/DebugHierarchyViewContainer;->bindFragmentRecords(Ljava/util/List;)V
+    invoke-virtual {v0, v1}, Lcn/kuwo/base/fragment/DebugHierarchyViewContainer;->a(Ljava/util/List;)V
 
-    .line 1570
+    .line 1543
     new-instance v1, Landroid/view/ViewGroup$LayoutParams;
 
     const/4 v2, -0x1
@@ -3130,7 +3180,7 @@
 
     invoke-virtual {v0, v1}, Lcn/kuwo/base/fragment/DebugHierarchyViewContainer;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 1572
+    .line 1545
     new-instance v1, Landroid/app/AlertDialog$Builder;
 
     iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->activity:Landroid/app/Activity;
@@ -3139,12 +3189,12 @@
 
     const-string/jumbo v2, "栈视图"
 
-    .line 1573
+    .line 1546
     invoke-virtual {v1, v2}, Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
 
     move-result-object v1
 
-    .line 1574
+    .line 1547
     invoke-virtual {v1, v0}, Landroid/app/AlertDialog$Builder;->setView(Landroid/view/View;)Landroid/app/AlertDialog$Builder;
 
     move-result-object v0
@@ -3153,24 +3203,24 @@
 
     const/4 v2, 0x0
 
-    .line 1575
+    .line 1548
     invoke-virtual {v0, v1, v2}, Landroid/app/AlertDialog$Builder;->setPositiveButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
 
     move-result-object v0
 
     const/4 v1, 0x1
 
-    .line 1576
+    .line 1549
     invoke-virtual {v0, v1}, Landroid/app/AlertDialog$Builder;->setCancelable(Z)Landroid/app/AlertDialog$Builder;
 
     move-result-object v0
 
-    .line 1577
+    .line 1550
     invoke-virtual {v0}, Landroid/app/AlertDialog$Builder;->show()Landroid/app/AlertDialog;
     :try_end_3d
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_3d} :catch_3d
 
-    .line 1581
+    .line 1554
     :catch_3d
     invoke-static {}, Lcom/tencent/qqlive/module/videoreport/collect/EventCollector;->getInstance()Lcom/tencent/qqlive/module/videoreport/collect/EventCollector;
 
@@ -3184,10 +3234,10 @@
 .method public onCreate()V
     .registers 7
 
-    .line 463
+    .line 405
     invoke-super {p0}, Lcn/kuwo/ui/search/ViewMode;->onCreate()V
 
-    .line 464
+    .line 406
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->activity:Landroid/app/Activity;
 
     const v1, 0x7f090015
@@ -3198,13 +3248,13 @@
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mRootView:Landroid/view/View;
 
-    .line 466
+    .line 408
     invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->debugStackView()V
 
-    .line 467
+    .line 409
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mRootView:Landroid/view/View;
 
-    const v1, 0x7f092734
+    const v1, 0x7f09260d
 
     invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -3214,10 +3264,10 @@
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->rightFragment:Landroid/widget/FrameLayout;
 
-    .line 468
+    .line 410
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mRootView:Landroid/view/View;
 
-    const v1, 0x7f093d21
+    const v1, 0x7f093add
 
     invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -3227,13 +3277,13 @@
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->rlLeft:Landroid/widget/RelativeLayout;
 
-    .line 469
+    .line 411
     invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->initViewSize()V
 
-    .line 470
+    .line 412
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mRootView:Landroid/view/View;
 
-    const v1, 0x7f093ad7
+    const v1, 0x7f093895
 
     invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -3241,10 +3291,10 @@
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBar:Landroid/view/View;
 
-    .line 471
+    .line 413
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mRootView:Landroid/view/View;
 
-    const v1, 0x7f093816
+    const v1, 0x7f0935d5
 
     invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -3252,10 +3302,30 @@
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
-    .line 478
+    .line 414
+    sget-boolean v0, Lcn/kuwo/base/utils/b;->ab:Z
+
+    if-eqz v0, :cond_4f
+
+    .line 415
+    iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBar:Landroid/view/View;
+
+    const/16 v1, 0x8
+
+    invoke-virtual {v0, v1}, Landroid/view/View;->setVisibility(I)V
+
+    .line 417
+    :cond_4f
+    iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBar:Landroid/view/View;
+
+    iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->touchListener:Landroid/view/View$OnTouchListener;
+
+    invoke-virtual {v0, v1}, Landroid/view/View;->setOnTouchListener(Landroid/view/View$OnTouchListener;)V
+
+    .line 419
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mRootView:Landroid/view/View;
 
-    const v1, 0x7f0947d8
+    const v1, 0x7f09455f
 
     invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -3265,100 +3335,73 @@
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mViewPager:Lcn/kuwo/ui/common/NoScrollViewPager;
 
-    .line 479
+    .line 420
     new-instance v0, Ljava/util/ArrayList;
 
     invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
 
-    const/4 v1, 0x0
+    const-string/jumbo v1, "首页"
 
     const/4 v2, 0x0
 
-    const-string/jumbo v3, "首页"
+    const/4 v3, 0x0
 
-    .line 480
-    invoke-static {v1, v3, v2}, Lcn/kuwo/base/log/psrc/PsrcOptional;->build(Lcn/kuwo/base/log/psrc/PsrcInfo;Ljava/lang/String;I)Lcn/kuwo/base/log/psrc/PsrcInfo;
-
-    move-result-object v3
-
-    invoke-static {v3}, Lcn/kuwo/ui/online/library/LibraryHomeFragment;->newInstance(Lcn/kuwo/base/log/psrc/PsrcInfo;)Lcn/kuwo/ui/online/library/LibraryHomeFragment;
-
-    move-result-object v3
-
-    invoke-interface {v0, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
-
-    .line 481
-    invoke-static {}, Lcn/kuwo/ui/video/VideoTabFragment;->getInstance()Lcn/kuwo/ui/video/VideoTabFragment;
-
-    move-result-object v3
-
-    invoke-interface {v0, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
-
-    const-string/jumbo v3, "场景音乐首页"
-
-    .line 482
-    invoke-static {v1, v3, v2}, Lcn/kuwo/base/log/psrc/PsrcOptional;->build(Lcn/kuwo/base/log/psrc/PsrcInfo;Ljava/lang/String;I)Lcn/kuwo/base/log/psrc/PsrcInfo;
+    .line 421
+    invoke-static {v2, v1, v3}, Lcn/kuwo/base/log/psrc/c;->a(Lcn/kuwo/base/log/psrc/PsrcInfo;Ljava/lang/String;I)Lcn/kuwo/base/log/psrc/PsrcInfo;
 
     move-result-object v4
 
-    invoke-static {v4, v3}, Lcn/kuwo/ui/scene/SceneMusicFragment;->getInstance(Lcn/kuwo/base/log/psrc/PsrcInfo;Ljava/lang/String;)Landroidx/fragment/app/Fragment;
-
-    move-result-object v3
-
-    invoke-interface {v0, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
-
-    .line 483
-    new-instance v3, Lcn/kuwo/ui/fragment/LiveTabFragment;
-
-    invoke-direct {v3}, Lcn/kuwo/ui/fragment/LiveTabFragment;-><init>()V
-
-    invoke-interface {v0, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
-
-    .line 484
-    new-instance v3, Lcn/kuwo/ui/fragment/MineTabFragment;
-
-    invoke-direct {v3}, Lcn/kuwo/ui/fragment/MineTabFragment;-><init>()V
-
-    invoke-interface {v0, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
-
-    .line 485
-    new-instance v3, Lcn/kuwo/ui/fragment/HomePageAdapter;
-
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    invoke-static {v4}, Lcn/kuwo/ui/online/library/LibraryHomeFragment;->newInstance(Lcn/kuwo/base/log/psrc/PsrcInfo;)Lcn/kuwo/ui/online/library/LibraryHomeFragment;
 
     move-result-object v4
 
-    invoke-virtual {v4}, Lcn/kuwo/player/activities/MainActivity;->getSupportFragmentManager()Landroidx/fragment/app/FragmentManager;
+    invoke-interface {v0, v4}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
-    move-result-object v4
+    .line 431
+    new-instance v4, Lcn/kuwo/ui/fragment/MineTabFragment;
 
-    invoke-direct {v3, v4, v0}, Lcn/kuwo/ui/fragment/HomePageAdapter;-><init>(Landroidx/fragment/app/FragmentManager;Ljava/util/List;)V
+    invoke-direct {v4}, Lcn/kuwo/ui/fragment/MineTabFragment;-><init>()V
 
-    iput-object v3, p0, Lcn/kuwo/ui/fragment/MainController;->mAdapter:Lcn/kuwo/ui/fragment/HomePageAdapter;
+    invoke-interface {v0, v4}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
-    .line 487
+    .line 432
+    new-instance v4, Lcn/kuwo/ui/fragment/HomePageAdapter;
+
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
+
+    move-result-object v5
+
+    invoke-virtual {v5}, Lcn/kuwo/player/activities/MainActivity;->getSupportFragmentManager()Landroidx/fragment/app/FragmentManager;
+
+    move-result-object v5
+
+    invoke-direct {v4, v5, v0}, Lcn/kuwo/ui/fragment/HomePageAdapter;-><init>(Landroidx/fragment/app/FragmentManager;Ljava/util/List;)V
+
+    iput-object v4, p0, Lcn/kuwo/ui/fragment/MainController;->mAdapter:Lcn/kuwo/ui/fragment/HomePageAdapter;
+
+    .line 434
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mViewPager:Lcn/kuwo/ui/common/NoScrollViewPager;
 
-    invoke-virtual {v0, v2}, Lcn/kuwo/ui/common/NoScrollViewPager;->setCanScroll(Z)V
+    invoke-virtual {v0, v3}, Lcn/kuwo/ui/common/NoScrollViewPager;->setCanScroll(Z)V
 
-    .line 488
+    .line 435
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mViewPager:Lcn/kuwo/ui/common/NoScrollViewPager;
 
-    const/4 v3, 0x5
+    const/4 v4, 0x2
 
-    invoke-virtual {v0, v3}, Lcn/kuwo/ui/common/NoScrollViewPager;->setOffscreenPageLimit(I)V
+    invoke-virtual {v0, v4}, Lcn/kuwo/ui/common/NoScrollViewPager;->setOffscreenPageLimit(I)V
 
-    .line 489
+    .line 436
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mViewPager:Lcn/kuwo/ui/common/NoScrollViewPager;
 
     iget-object v4, p0, Lcn/kuwo/ui/fragment/MainController;->mAdapter:Lcn/kuwo/ui/fragment/HomePageAdapter;
 
     invoke-virtual {v0, v4}, Lcn/kuwo/ui/common/NoScrollViewPager;->setAdapter(Landroidx/viewpager/widget/PagerAdapter;)V
 
-    .line 490
+    .line 437
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mRootView:Landroid/view/View;
 
-    const v4, 0x7f090241
+    const v4, 0x7f09023e
 
     invoke-virtual {v0, v4}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -3368,10 +3411,10 @@
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
-    .line 491
+    .line 438
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mRootView:Landroid/view/View;
 
-    const v4, 0x7f09380e
+    const v4, 0x7f0935cd
 
     invoke-virtual {v0, v4}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -3381,10 +3424,10 @@
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mMiniGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
-    .line 492
+    .line 439
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mRootView:Landroid/view/View;
 
-    const v4, 0x7f0901cd
+    const v4, 0x7f0901cb
 
     invoke-virtual {v0, v4}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -3394,10 +3437,10 @@
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBkgGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
-    .line 493
+    .line 440
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mRootView:Landroid/view/View;
 
-    const v4, 0x7f090242
+    const v4, 0x7f09023f
 
     invoke-virtual {v0, v4}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -3407,10 +3450,10 @@
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
-    .line 494
+    .line 441
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mRootView:Landroid/view/View;
 
-    const v4, 0x7f093a6e
+    const v4, 0x7f093832
 
     invoke-virtual {v0, v4}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -3420,90 +3463,61 @@
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPendantGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
-    .line 495
-    iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mRootView:Landroid/view/View;
-
-    const v4, 0x7f094221
-
-    invoke-virtual {v0, v4}, Landroid/view/View;->findViewById(I)Landroid/view/View;
-
-    move-result-object v0
-
-    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mTranslateBgView:Landroid/view/View;
-
-    .line 497
+    .line 442
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
-    iget-object v4, p0, Lcn/kuwo/ui/fragment/MainController;->mContext:Landroid/content/Context;
-
-    invoke-virtual {v0, v4}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->createAdapter(Landroid/content/Context;)Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout$BottomTabAdapter;
+    invoke-virtual {v0}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->createAdapter()Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout$BottomTabAdapter;
 
     move-result-object v0
 
-    new-array v3, v3, [Lcn/kuwo/ui/widget/bottomTabLayout/BottomTab;
+    const v4, 0x7f0823b3
 
-    sget-object v4, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTab;->HOME:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTab;
+    const v5, 0x7f0823b4
 
-    aput-object v4, v3, v2
+    .line 443
+    invoke-direct {p0, v1, v4, v5}, Lcn/kuwo/ui/fragment/MainController;->newTab(Ljava/lang/String;II)Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabItemView;
 
-    sget-object v4, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTab;->VIDEO:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTab;
+    move-result-object v1
 
-    const/4 v5, 0x1
-
-    aput-object v4, v3, v5
-
-    sget-object v4, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTab;->SCENE:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTab;
-
-    const/4 v5, 0x2
-
-    aput-object v4, v3, v5
-
-    sget-object v4, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTab;->LIVE:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTab;
-
-    const/4 v5, 0x3
-
-    aput-object v4, v3, v5
-
-    sget-object v4, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTab;->MINE:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTab;
-
-    const/4 v5, 0x4
-
-    aput-object v4, v3, v5
-
-    .line 498
-    invoke-virtual {v0, v3}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout$BottomTabAdapter;->setTabs([Lcn/kuwo/ui/widget/bottomTabLayout/BottomTab;)Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout$BottomTabAdapter;
+    invoke-virtual {v0, v1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout$BottomTabAdapter;->addTab(Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabItemView;)Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout$BottomTabAdapter;
 
     move-result-object v0
 
-    .line 499
+    const v1, 0x7f0823b7
+
+    const v4, 0x7f0823b8
+
+    const-string/jumbo v5, "我的"
+
+    .line 447
+    invoke-direct {p0, v5, v1, v4}, Lcn/kuwo/ui/fragment/MainController;->newTab(Ljava/lang/String;II)Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabItemView;
+
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout$BottomTabAdapter;->addTab(Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabItemView;)Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout$BottomTabAdapter;
+
+    move-result-object v0
+
+    .line 448
     invoke-virtual {v0}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout$BottomTabAdapter;->build()Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
-    .line 500
+    .line 449
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
-    iget-object v3, p0, Lcn/kuwo/ui/fragment/MainController;->mViewPager:Lcn/kuwo/ui/common/NoScrollViewPager;
+    iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mViewPager:Lcn/kuwo/ui/common/NoScrollViewPager;
 
-    invoke-virtual {v0, v3}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->bindViewPage(Landroidx/viewpager/widget/ViewPager;)V
+    invoke-virtual {v0, v1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->bindViewPage(Landroidx/viewpager/widget/ViewPager;)V
 
-    .line 501
+    .line 451
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
-    new-instance v3, Lcn/kuwo/ui/fragment/MainController$TabSelectedListener;
+    new-instance v1, Lcn/kuwo/ui/fragment/MainController$TabClickListener;
 
-    invoke-direct {v3, p0, v1}, Lcn/kuwo/ui/fragment/MainController$TabSelectedListener;-><init>(Lcn/kuwo/ui/fragment/MainController;Lcn/kuwo/ui/fragment/MainController$1;)V
+    invoke-direct {v1, p0, v2}, Lcn/kuwo/ui/fragment/MainController$TabClickListener;-><init>(Lcn/kuwo/ui/fragment/MainController;Lcn/kuwo/ui/fragment/MainController$1;)V
 
-    invoke-virtual {v0, v3}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->addOnTabSelectedListener(Lcn/kuwo/ui/widget/bottomTabLayout/OnTabSelectedListener;)V
+    invoke-virtual {v0, v1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->setOnTabClickListener(Lcn/kuwo/ui/widget/bottomTabLayout/OnTabClickListener;)V
 
-    .line 502
-    iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
-
-    new-instance v3, Lcn/kuwo/ui/fragment/MainController$TabClickListener;
-
-    invoke-direct {v3, v1}, Lcn/kuwo/ui/fragment/MainController$TabClickListener;-><init>(Lcn/kuwo/ui/fragment/MainController$1;)V
-
-    invoke-virtual {v0, v3}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->setOnTabClickListener(Lcn/kuwo/ui/widget/bottomTabLayout/OnTabClickListener;)V
-
-    .line 503
+    .line 452
     new-instance v0, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabRedTipManager;
 
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mRootView:Landroid/view/View;
@@ -3516,239 +3530,241 @@
 
     const-string v1, "current_login_uid"
 
-    const-string v3, "0"
+    const-string v2, "0"
 
-    .line 504
-    invoke-static {v0, v1, v3}, Lcn/kuwo/base/config/ConfMgr;->getStringValue(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    .line 453
+    invoke-static {v0, v1, v2}, Lcn/kuwo/base/config/c;->a(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
 
     move-result-object v0
 
-    .line 505
-    invoke-static {v0, v2}, Lcn/kuwo/base/utils/StringUtils;->String2Int(Ljava/lang/String;I)I
+    .line 454
+    invoke-static {v0, v3}, Lcn/kuwo/base/utils/bf;->a(Ljava/lang/String;I)I
 
     move-result v0
 
-    if-gtz v0, :cond_15f
+    if-gtz v0, :cond_13e
 
-    .line 508
+    .line 457
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mTabRedTipManager:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabRedTipManager;
 
     invoke-virtual {v0}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabRedTipManager;->requestTip()V
 
-    .line 509
-    invoke-static {v2}, Lcn/kuwo/ui/fragment/MainController;->onStatLiveHomeTabShowEvent(Z)V
+    .line 458
+    invoke-static {v3}, Lcn/kuwo/ui/fragment/MainController;->onStatLiveHomeTabShowEvent(Z)V
 
-    .line 510
-    sput-boolean v2, Lcn/kuwo/show/base/constants/LiveTabRedNumConstant;->IS_SHOW_LIVE_TAB_SHOW_REPORT:Z
+    .line 459
+    sput-boolean v3, Lcn/kuwo/show/base/constants/LiveTabRedNumConstant;->IS_SHOW_LIVE_TAB_SHOW_REPORT:Z
 
-    .line 512
-    :cond_15f
+    .line 461
+    :cond_13e
     sget v0, Lcn/kuwo/ui/fragment/MainController;->tabIndex:I
 
-    if-ltz v0, :cond_169
+    if-ltz v0, :cond_148
 
-    .line 513
+    .line 462
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
     invoke-virtual {v1, v0}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->setSelected(I)V
 
-    goto :goto_182
+    goto :goto_162
 
-    .line 515
-    :cond_169
-    invoke-static {}, Lcn/kuwo/base/utils/NetworkStateUtil;->isOnlyWifiConnect()Z
-
-    move-result v0
-
-    if-nez v0, :cond_179
-
-    invoke-static {}, Lcn/kuwo/base/utils/NetworkStateUtil;->isAvaliable()Z
+    .line 464
+    :cond_148
+    invoke-static {}, Lcn/kuwo/base/utils/NetworkStateUtil;->l()Z
 
     move-result v0
 
-    if-nez v0, :cond_176
+    if-nez v0, :cond_158
 
-    goto :goto_179
+    invoke-static {}, Lcn/kuwo/base/utils/NetworkStateUtil;->a()Z
 
-    .line 518
-    :cond_176
-    sput v2, Lcn/kuwo/ui/fragment/MainController;->tabIndex:I
+    move-result v0
 
-    goto :goto_17b
+    if-nez v0, :cond_155
 
-    .line 516
-    :cond_179
-    :goto_179
-    sput v5, Lcn/kuwo/ui/fragment/MainController;->tabIndex:I
+    goto :goto_158
 
-    .line 520
-    :goto_17b
+    .line 467
+    :cond_155
+    sput v3, Lcn/kuwo/ui/fragment/MainController;->tabIndex:I
+
+    goto :goto_15b
+
+    :cond_158
+    :goto_158
+    const/4 v0, 0x3
+
+    .line 465
+    sput v0, Lcn/kuwo/ui/fragment/MainController;->tabIndex:I
+
+    .line 469
+    :goto_15b
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
     sget v1, Lcn/kuwo/ui/fragment/MainController;->tabIndex:I
 
     invoke-virtual {v0, v1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->setSelected(I)V
 
-    .line 522
-    :goto_182
+    .line 471
+    :goto_162
     invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->adjustBottomHeight()V
 
-    .line 523
+    .line 472
     invoke-virtual {p0}, Lcn/kuwo/ui/fragment/MainController;->setSlidingMenuMode()V
 
-    .line 524
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 473
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_CHANGE_THEME:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mThemeChangedOb:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mThemeChangedOb:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->attachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->a(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 525
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 474
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_SKINMANAGER:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mSkinChangedOb:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mSkinChangedOb:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->attachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->a(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 526
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 475
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_KSINGCONTROL:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->attachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->a(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 527
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 476
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_PLAYCONTROL:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->attachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->a(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 528
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 477
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_CDCONTROL:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->attachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->a(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 529
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 478
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_FM_CONTROL:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->attachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->a(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 530
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 479
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_AUDIO_AD_CONTROL:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->attachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->a(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 531
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 480
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_CARCONTROL:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mCarControlObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mCarControlObserver:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->attachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->a(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 532
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 481
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_USERINFO:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->userInfoObserver:Lcn/kuwo/core/observers/ext/UserInfoMgrObserver;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->userInfoObserver:Lcn/kuwo/core/observers/ext/bg;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->attachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->a(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 533
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 482
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_CHANGE_SIZE:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mSizeChangedOb:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mSizeChangedOb:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->attachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->a(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 534
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 483
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_PLAY_CONTENT_CHANGED:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->playContentChangeObserver:Lcn/kuwo/core/observers/IPlayContentChangedObservice;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->playContentChangeObserver:Lcn/kuwo/core/observers/dl;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->attachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->a(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 535
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 484
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_BLUETOOTH_STATE:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->blueObserver:Lcn/kuwo/core/observers/IBlueToothStateObserver;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->blueObserver:Lcn/kuwo/core/observers/y;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->attachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->a(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 536
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 485
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_CAR_POP:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->carPopObserver:Lcn/kuwo/core/observers/IBlueToothCarPopObserver;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->carPopObserver:Lcn/kuwo/core/observers/x;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->attachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->a(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 537
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 486
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_VIP:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mVipConfigObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mVipConfigObserver:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->attachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->a(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
     return-void
 .end method
@@ -3756,178 +3772,178 @@
 .method public onDestroy()V
     .registers 4
 
-    .line 696
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 646
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_CARCONTROL:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mCarControlObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mCarControlObserver:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->detachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->b(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 697
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 647
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_CHANGE_THEME:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mThemeChangedOb:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mThemeChangedOb:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->detachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->b(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 698
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 648
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_SKINMANAGER:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mSkinChangedOb:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mSkinChangedOb:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->detachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->b(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 699
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 649
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_KSINGCONTROL:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->detachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->b(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 700
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 650
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_PLAYCONTROL:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->detachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->b(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 701
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 651
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_CDCONTROL:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->detachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->b(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 702
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 652
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_FM_CONTROL:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->detachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->b(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 703
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 653
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_AUDIO_AD_CONTROL:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayControlObserver:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->detachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->b(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 704
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 654
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_CHANGE_SIZE:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mSizeChangedOb:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mSizeChangedOb:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->detachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->b(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 705
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 655
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_USERINFO:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->userInfoObserver:Lcn/kuwo/core/observers/ext/UserInfoMgrObserver;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->userInfoObserver:Lcn/kuwo/core/observers/ext/bg;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->detachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->b(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 706
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 656
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_PLAY_CONTENT_CHANGED:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->playContentChangeObserver:Lcn/kuwo/core/observers/IPlayContentChangedObservice;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->playContentChangeObserver:Lcn/kuwo/core/observers/dl;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->detachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->b(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 707
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 657
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_BLUETOOTH_STATE:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->blueObserver:Lcn/kuwo/core/observers/IBlueToothStateObserver;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->blueObserver:Lcn/kuwo/core/observers/y;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->detachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->b(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 708
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 658
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_CAR_POP:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->carPopObserver:Lcn/kuwo/core/observers/IBlueToothCarPopObserver;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->carPopObserver:Lcn/kuwo/core/observers/x;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->detachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->b(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 709
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 659
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
     sget-object v1, Lcn/kuwo/core/messagemgr/MessageID;->OBSERVER_VIP:Lcn/kuwo/core/messagemgr/MessageID;
 
-    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mVipConfigObserver:Lcn/kuwo/core/messagemgr/IObserverBase;
+    iget-object v2, p0, Lcn/kuwo/ui/fragment/MainController;->mVipConfigObserver:Lcn/kuwo/core/messagemgr/b;
 
-    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/MessageManager;->detachMessage(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/IObserverBase;)V
+    invoke-virtual {v0, v1, v2}, Lcn/kuwo/core/messagemgr/c;->b(Lcn/kuwo/core/messagemgr/MessageID;Lcn/kuwo/core/messagemgr/b;)V
 
-    .line 714
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    .line 664
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object v0
 
-    invoke-static {v0}, Lcom/tme/bluetooth/TmeBlueToothMgr;->unregisterTmeBlueTooth(Landroid/app/Activity;)V
+    invoke-static {v0}, Lcom/tme/bluetooth/b;->b(Landroid/app/Activity;)V
 
-    .line 715
-    sget-boolean v0, Lcn/kuwo/base/utils/AppInfo;->IS_DEBUG:Z
+    .line 665
+    sget-boolean v0, Lcn/kuwo/base/utils/b;->N:Z
 
     if-eqz v0, :cond_c4
 
-    .line 716
+    .line 666
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mDebugView:Landroid/view/View;
 
     if-eqz v0, :cond_c3
 
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object v0
 
@@ -3935,9 +3951,9 @@
 
     goto :goto_c3
 
-    .line 719
+    .line 669
     :cond_b0
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object v0
 
@@ -3947,14 +3963,14 @@
 
     if-eqz v0, :cond_c4
 
-    .line 721
+    .line 671
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mDebugView:Landroid/view/View;
 
     invoke-virtual {v0, v1}, Landroid/widget/FrameLayout;->removeView(Landroid/view/View;)V
 
     const/4 v0, 0x0
 
-    .line 722
+    .line 672
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mDebugView:Landroid/view/View;
 
     goto :goto_c4
@@ -3963,7 +3979,7 @@
     :goto_c3
     return-void
 
-    .line 725
+    .line 675
     :cond_c4
     :goto_c4
     invoke-super {p0}, Lcn/kuwo/ui/search/ViewMode;->onDestroy()V
@@ -3974,20 +3990,20 @@
 .method public onPause()V
     .registers 2
 
-    .line 687
+    .line 637
     invoke-super {p0}, Lcn/kuwo/ui/search/ViewMode;->onPause()V
 
-    .line 688
+    .line 638
     iget-boolean v0, p0, Lcn/kuwo/ui/fragment/MainController;->bActive:Z
 
     if-eqz v0, :cond_d
 
     const/4 v0, 0x0
 
-    .line 689
+    .line 639
     iput-boolean v0, p0, Lcn/kuwo/ui/fragment/MainController;->bActive:Z
 
-    .line 690
+    .line 640
     invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->Pause()V
 
     :cond_d
@@ -3999,22 +4015,22 @@
 
     const-string v0, "MainController->onResume"
 
-    .line 648
-    invoke-static {v0}, Lcn/kuwo/base/utils/RunTimeUtils;->start(Ljava/lang/String;)V
+    .line 598
+    invoke-static {v0}, Lcn/kuwo/base/utils/aw;->a(Ljava/lang/String;)V
 
-    .line 649
+    .line 599
     invoke-super {p0}, Lcn/kuwo/ui/search/ViewMode;->onResume()V
 
-    .line 651
+    .line 601
     iget-boolean v1, p0, Lcn/kuwo/ui/fragment/MainController;->bActive:Z
 
     if-nez v1, :cond_23
 
-    invoke-static {}, Lcn/kuwo/base/fragment/FragmentOperation;->getInstance()Lcn/kuwo/base/fragment/FragmentOperation;
+    invoke-static {}, Lcn/kuwo/base/fragment/b;->getInstance()Lcn/kuwo/base/fragment/b;
 
     move-result-object v1
 
-    invoke-virtual {v1}, Lcn/kuwo/base/fragment/FragmentOperation;->isMainLayerShow()Z
+    invoke-virtual {v1}, Lcn/kuwo/base/fragment/b;->isMainLayerShow()Z
 
     move-result v1
 
@@ -4022,22 +4038,22 @@
 
     const/4 v1, 0x1
 
-    .line 652
+    .line 602
     iput-boolean v1, p0, Lcn/kuwo/ui/fragment/MainController;->bActive:Z
 
-    .line 654
+    .line 604
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mContext:Landroid/content/Context;
 
     check-cast v1, Landroid/app/Activity;
 
-    invoke-static {v1}, Lcom/tme/bluetooth/TmeBlueToothMgr;->registerTmeBlueTooth(Landroid/app/Activity;)V
+    invoke-static {v1}, Lcom/tme/bluetooth/b;->a(Landroid/app/Activity;)V
 
-    .line 655
+    .line 605
     invoke-direct {p0}, Lcn/kuwo/ui/fragment/MainController;->Resume()V
 
-    .line 657
+    .line 607
     :cond_23
-    invoke-static {v0}, Lcn/kuwo/base/utils/RunTimeUtils;->end(Ljava/lang/String;)V
+    invoke-static {v0}, Lcn/kuwo/base/utils/aw;->b(Ljava/lang/String;)V
 
     return-void
 .end method
@@ -4045,33 +4061,33 @@
 .method public removeRightView()V
     .registers 3
 
-    .line 1515
-    invoke-static {}, Lcn/kuwo/base/utils/DeviceInfo;->isFoldStates()Z
+    .line 1488
+    invoke-static {}, Lcn/kuwo/base/utils/j;->p()Z
 
     move-result v0
 
     if-nez v0, :cond_1c
 
-    .line 1516
+    .line 1489
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->rightFragment:Landroid/widget/FrameLayout;
 
     const/16 v1, 0x8
 
     invoke-virtual {v0, v1}, Landroid/widget/FrameLayout;->setVisibility(I)V
 
-    .line 1517
+    .line 1490
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->rlLeft:Landroid/widget/RelativeLayout;
 
     invoke-virtual {v0}, Landroid/widget/RelativeLayout;->getLayoutParams()Landroid/view/ViewGroup$LayoutParams;
 
     move-result-object v0
 
-    .line 1518
-    sget v1, Lcn/kuwo/base/utils/DeviceInfo;->ACTUALWIDTH:I
+    .line 1491
+    sget v1, Lcn/kuwo/base/utils/j;->g:I
 
     iput v1, v0, Landroid/view/ViewGroup$LayoutParams;->width:I
 
-    .line 1519
+    .line 1492
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->rlLeft:Landroid/widget/RelativeLayout;
 
     invoke-virtual {v1, v0}, Landroid/widget/RelativeLayout;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V
@@ -4085,7 +4101,7 @@
 
     const/4 v0, -0x1
 
-    .line 594
+    .line 543
     invoke-virtual {p0, p1, v0}, Lcn/kuwo/ui/fragment/MainController;->selectSubPages(II)V
 
     return-void
@@ -4094,17 +4110,17 @@
 .method public selectSubPages(II)V
     .registers 7
 
-    .line 609
+    .line 559
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
     if-eqz v0, :cond_b
 
-    .line 610
+    .line 560
     sget v1, Lcn/kuwo/ui/fragment/MainController;->tabIndex:I
 
     if-eq p1, v1, :cond_b
 
-    .line 611
+    .line 561
     invoke-virtual {v0, p1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->setSelected(I)V
 
     :cond_b
@@ -4112,8 +4128,8 @@
 
     if-eq p2, v0, :cond_1e
 
-    .line 615
-    invoke-static {}, Lcn/kuwo/core/messagemgr/MessageManager;->getInstance()Lcn/kuwo/core/messagemgr/MessageManager;
+    .line 565
+    invoke-static {}, Lcn/kuwo/core/messagemgr/c;->a()Lcn/kuwo/core/messagemgr/c;
 
     move-result-object v0
 
@@ -4125,7 +4141,7 @@
 
     invoke-direct {v3, p0, p1, p2}, Lcn/kuwo/ui/fragment/MainController$12;-><init>(Lcn/kuwo/ui/fragment/MainController;II)V
 
-    invoke-virtual {v0, v1, v2, v3}, Lcn/kuwo/core/messagemgr/MessageManager;->asyncNotify(Lcn/kuwo/core/messagemgr/MessageID;ILcn/kuwo/core/messagemgr/MessageManager$Caller;)V
+    invoke-virtual {v0, v1, v2, v3}, Lcn/kuwo/core/messagemgr/c;->a(Lcn/kuwo/core/messagemgr/MessageID;ILcn/kuwo/core/messagemgr/c$a;)V
 
     :cond_1e
     return-void
@@ -4134,7 +4150,7 @@
 .method public setCurrentTab(I)V
     .registers 3
 
-    .line 851
+    .line 799
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
 
     invoke-virtual {v0, p1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->setSelected(I)V
@@ -4143,9 +4159,9 @@
 .end method
 
 .method public setMainViewPagerVisibility(I)V
-    .registers 8
+    .registers 6
 
-    .line 772
+    .line 728
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mHideAnimator:Landroid/animation/ValueAnimator;
 
     if-eqz v0, :cond_f
@@ -4156,18 +4172,14 @@
 
     if-eqz v0, :cond_f
 
-    .line 773
+    .line 729
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mHideAnimator:Landroid/animation/ValueAnimator;
 
     invoke-virtual {v0}, Landroid/animation/ValueAnimator;->end()V
 
-    .line 775
+    .line 731
     :cond_f
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mViewPager:Lcn/kuwo/ui/common/NoScrollViewPager;
-
-    const/4 v1, 0x1
-
-    const/4 v2, 0x0
 
     if-eqz v0, :cond_46
 
@@ -4177,98 +4189,66 @@
 
     if-eq v0, p1, :cond_46
 
-    .line 776
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    .line 732
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object v0
 
-    const v3, 0x7f093f7e
+    const v1, 0x7f093d1a
 
-    invoke-virtual {v0, v3}, Lcn/kuwo/player/activities/MainActivity;->findViewById(I)Landroid/view/View;
-
-    move-result-object v0
-
-    const/16 v3, 0x8
-
-    if-ne p1, v3, :cond_3c
-
-    const/16 v3, 0x190
-
-    const/4 v4, 0x2
-
-    new-array v4, v4, [Landroid/view/View;
-
-    .line 778
-    iget-object v5, p0, Lcn/kuwo/ui/fragment/MainController;->mViewPager:Lcn/kuwo/ui/common/NoScrollViewPager;
-
-    aput-object v5, v4, v2
-
-    aput-object v0, v4, v1
-
-    invoke-static {v3, v4}, Lcn/kuwo/base/utils/ViewChangeAnimationUtils;->animationHideViews(I[Landroid/view/View;)Landroid/animation/ValueAnimator;
+    invoke-virtual {v0, v1}, Lcn/kuwo/player/activities/MainActivity;->findViewById(I)Landroid/view/View;
 
     move-result-object v0
 
-    iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mHideAnimator:Landroid/animation/ValueAnimator;
+    const/16 v1, 0x8
+
+    if-ne p1, v1, :cond_3c
+
+    const/16 p1, 0x190
+
+    const/4 v1, 0x2
+
+    new-array v1, v1, [Landroid/view/View;
+
+    const/4 v2, 0x0
+
+    .line 734
+    iget-object v3, p0, Lcn/kuwo/ui/fragment/MainController;->mViewPager:Lcn/kuwo/ui/common/NoScrollViewPager;
+
+    aput-object v3, v1, v2
+
+    const/4 v2, 0x1
+
+    aput-object v0, v1, v2
+
+    invoke-static {p1, v1}, Lcn/kuwo/base/utils/bk;->a(I[Landroid/view/View;)Landroid/animation/ValueAnimator;
+
+    move-result-object p1
+
+    iput-object p1, p0, Lcn/kuwo/ui/fragment/MainController;->mHideAnimator:Landroid/animation/ValueAnimator;
 
     goto :goto_46
 
-    .line 780
+    .line 736
     :cond_3c
-    iget-object v3, p0, Lcn/kuwo/ui/fragment/MainController;->mViewPager:Lcn/kuwo/ui/common/NoScrollViewPager;
+    iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->mViewPager:Lcn/kuwo/ui/common/NoScrollViewPager;
 
-    invoke-virtual {v3, p1}, Lcn/kuwo/ui/common/NoScrollViewPager;->setVisibility(I)V
+    invoke-virtual {v1, p1}, Lcn/kuwo/ui/common/NoScrollViewPager;->setVisibility(I)V
 
     if-eqz v0, :cond_46
 
-    .line 782
+    .line 738
     invoke-virtual {v0, p1}, Landroid/view/View;->setVisibility(I)V
 
-    .line 787
     :cond_46
     :goto_46
-    invoke-virtual {p0}, Lcn/kuwo/ui/fragment/MainController;->getCurrentTab()Landroidx/fragment/app/Fragment;
-
-    move-result-object v0
-
-    .line 788
-    instance-of v3, v0, Lcn/kuwo/ui/online/library/LibraryHomeFragment;
-
-    if-eqz v3, :cond_61
-
-    .line 789
-    check-cast v0, Lcn/kuwo/ui/online/library/LibraryHomeFragment;
-
-    invoke-virtual {v0, v2}, Lcn/kuwo/ui/online/library/LibraryHomeFragment;->getTabFragment(I)Landroidx/fragment/app/Fragment;
-
-    move-result-object v0
-
-    .line 790
-    instance-of v3, v0, Lcn/kuwo/ui/online/library/LibraryRecommendFragment;
-
-    if-eqz v3, :cond_61
-
-    .line 791
-    check-cast v0, Lcn/kuwo/ui/online/library/LibraryRecommendFragment;
-
-    if-nez p1, :cond_5d
-
-    goto :goto_5e
-
-    :cond_5d
-    const/4 v1, 0x0
-
-    :goto_5e
-    invoke-virtual {v0, v1}, Lcn/kuwo/ui/online/library/LibraryRecommendFragment;->weatherLottie(Z)V
-
-    :cond_61
     return-void
 .end method
 
 .method public setMiniAndBottomGrey(Z)V
     .registers 4
 
-    .line 1475
+    .line 1448
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mMiniGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
     if-eqz v0, :cond_23
@@ -4287,21 +4267,21 @@
 
     goto :goto_23
 
-    .line 1478
+    .line 1451
     :cond_11
     invoke-virtual {v0, p1}, Lcn/kuwo/ui/widget/GrayFrameLayout;->setForceColor(Z)V
 
-    .line 1479
+    .line 1452
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mMiniGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
     invoke-virtual {v0, p1}, Lcn/kuwo/ui/widget/GrayFrameLayout;->setForceColor(Z)V
 
-    .line 1480
+    .line 1453
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
     invoke-virtual {v0, p1}, Lcn/kuwo/ui/widget/GrayFrameLayout;->setForceColor(Z)V
 
-    .line 1481
+    .line 1454
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPendantGray:Lcn/kuwo/ui/widget/GrayFrameLayout;
 
     invoke-virtual {v0, p1}, Lcn/kuwo/ui/widget/GrayFrameLayout;->setForceColor(Z)V
@@ -4314,7 +4294,7 @@
 .method public setMiniPlayPanelVisible(Z)V
     .registers 3
 
-    .line 952
+    .line 911
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     if-eqz p1, :cond_6
@@ -4335,7 +4315,7 @@
 .method public setPlayControlPanelVisible(Z)V
     .registers 6
 
-    .line 881
+    .line 839
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     if-nez v0, :cond_5
@@ -4345,7 +4325,7 @@
     :cond_5
     if-eqz p1, :cond_32
 
-    .line 885
+    .line 843
     invoke-virtual {v0}, Landroid/view/View;->getVisibility()I
 
     move-result p1
@@ -4354,7 +4334,7 @@
 
     return-void
 
-    .line 888
+    .line 846
     :cond_e
     iget-object p1, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
@@ -4384,19 +4364,19 @@
 
     move-result-object p1
 
-    .line 892
-    new-instance v0, Lcn/kuwo/ui/fragment/MainController$13;
+    .line 850
+    new-instance v0, Lcn/kuwo/ui/fragment/MainController$14;
 
-    invoke-direct {v0, p0}, Lcn/kuwo/ui/fragment/MainController$13;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
+    invoke-direct {v0, p0}, Lcn/kuwo/ui/fragment/MainController$14;-><init>(Lcn/kuwo/ui/fragment/MainController;)V
 
     invoke-virtual {p1, v0}, Landroid/animation/ObjectAnimator;->addListener(Landroid/animation/Animator$AnimatorListener;)V
 
-    .line 898
+    .line 857
     invoke-virtual {p1}, Landroid/animation/ObjectAnimator;->start()V
 
     goto :goto_47
 
-    .line 900
+    .line 859
     :cond_32
     invoke-virtual {v0}, Landroid/view/View;->getVisibility()I
 
@@ -4408,15 +4388,15 @@
 
     return-void
 
-    .line 903
+    .line 862
     :cond_3b
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object p1
 
-    invoke-virtual {p1}, Lcn/kuwo/player/activities/MainActivity;->closeVipView()V
+    invoke-virtual {p1}, Lcn/kuwo/player/activities/MainActivity;->e()V
 
-    .line 904
+    .line 863
     iget-object p1, p0, Lcn/kuwo/ui/fragment/MainController;->mPlayerBarContainer:Landroid/view/View;
 
     invoke-virtual {p1, v0}, Landroid/view/View;->setVisibility(I)V
@@ -4425,29 +4405,18 @@
     return-void
 .end method
 
-.method public setSceneBackground(I)V
-    .registers 3
-
-    .line 1234
-    iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mBottomTab:Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;
-
-    invoke-virtual {v0, p1}, Lcn/kuwo/ui/widget/bottomTabLayout/BottomTabLayout;->setSceneBackground(I)V
-
-    return-void
-.end method
-
 .method public setSlidingMenuMode()V
     .registers 3
 
-    .line 836
+    .line 784
     invoke-virtual {p0}, Lcn/kuwo/ui/fragment/MainController;->getCurrentTabIndex()I
 
     move-result v0
 
     if-eqz v0, :cond_e
 
-    .line 838
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    .line 786
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object v0
 
@@ -4455,18 +4424,18 @@
 
     goto :goto_25
 
-    .line 841
+    .line 789
     :cond_e
     invoke-virtual {p0}, Lcn/kuwo/ui/fragment/MainController;->getCurrentTab()Landroidx/fragment/app/Fragment;
 
     move-result-object v0
 
-    .line 842
+    .line 790
     instance-of v1, v0, Lcn/kuwo/ui/online/library/LibraryHomeFragment;
 
     if-eqz v1, :cond_25
 
-    .line 843
+    .line 791
     check-cast v0, Lcn/kuwo/ui/online/library/LibraryHomeFragment;
 
     invoke-virtual {v0}, Lcn/kuwo/ui/online/library/LibraryHomeFragment;->getCurrentTabPosition()I
@@ -4475,8 +4444,8 @@
 
     if-nez v0, :cond_25
 
-    .line 844
-    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->getInstance()Lcn/kuwo/player/activities/MainActivity;
+    .line 792
+    invoke-static {}, Lcn/kuwo/player/activities/MainActivity;->a()Lcn/kuwo/player/activities/MainActivity;
 
     move-result-object v0
 
@@ -4490,7 +4459,7 @@
 .method public setVideoTabParams(Ljava/lang/String;)V
     .registers 4
 
-    .line 1485
+    .line 1458
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mAdapter:Lcn/kuwo/ui/fragment/HomePageAdapter;
 
     if-eqz v0, :cond_1b
@@ -4505,7 +4474,7 @@
 
     goto :goto_1b
 
-    .line 1488
+    .line 1461
     :cond_c
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mAdapter:Lcn/kuwo/ui/fragment/HomePageAdapter;
 
@@ -4513,12 +4482,12 @@
 
     move-result-object v0
 
-    .line 1489
+    .line 1462
     instance-of v1, v0, Lcn/kuwo/ui/video/VideoTabFragment;
 
     if-eqz v1, :cond_1b
 
-    .line 1490
+    .line 1463
     check-cast v0, Lcn/kuwo/ui/video/VideoTabFragment;
 
     invoke-virtual {v0, p1}, Lcn/kuwo/ui/video/VideoTabFragment;->pushMsgJson(Ljava/lang/String;)V
@@ -4531,15 +4500,15 @@
 .method public showCarGuide(Z)V
     .registers 4
 
-    .line 920
+    .line 879
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->stubCar:Landroid/view/ViewStub;
 
     if-nez v0, :cond_11
 
-    .line 921
+    .line 880
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->activity:Landroid/app/Activity;
 
-    const v1, 0x7f090301
+    const v1, 0x7f0902fd
 
     invoke-virtual {v0, v1}, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
 
@@ -4549,7 +4518,7 @@
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->stubCar:Landroid/view/ViewStub;
 
-    .line 923
+    .line 882
     :cond_11
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->stubCar:Landroid/view/ViewStub;
 
@@ -4559,17 +4528,17 @@
 
     if-nez v1, :cond_2c
 
-    .line 924
+    .line 883
     invoke-virtual {v0}, Landroid/view/ViewStub;->inflate()Landroid/view/View;
 
     move-result-object v0
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->carView:Landroid/view/View;
 
-    .line 925
+    .line 884
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->carView:Landroid/view/View;
 
-    const v1, 0x7f09304d
+    const v1, 0x7f092e36
 
     invoke-virtual {v0, v1}, Landroid/view/View;->findViewById(I)Landroid/view/View;
 
@@ -4579,7 +4548,7 @@
 
     iput-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->tagView:Landroid/widget/ImageView;
 
-    .line 927
+    .line 886
     :cond_2c
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->carView:Landroid/view/View;
 
@@ -4591,25 +4560,25 @@
 
     const/4 p1, 0x1
 
-    .line 929
+    .line 888
     iput-boolean p1, p0, Lcn/kuwo/ui/fragment/MainController;->isShowingCarGuide:Z
 
-    .line 930
+    .line 889
     invoke-virtual {v0, v1}, Landroid/view/View;->setVisibility(I)V
 
-    .line 931
+    .line 890
     iget-object p1, p0, Lcn/kuwo/ui/fragment/MainController;->tagView:Landroid/widget/ImageView;
 
-    const v0, 0x7f0802eb
+    const v0, 0x7f0802d9
 
     invoke-virtual {p1, v0}, Landroid/widget/ImageView;->setImageResource(I)V
 
-    .line 932
-    sget p1, Lcn/kuwo/base/utils/DeviceInfo;->WIDTH:I
+    .line 891
+    sget p1, Lcn/kuwo/base/utils/j;->f:I
 
     if-lez p1, :cond_70
 
-    .line 933
+    .line 892
     iget-object p1, p0, Lcn/kuwo/ui/fragment/MainController;->tagView:Landroid/widget/ImageView;
 
     invoke-virtual {p1}, Landroid/widget/ImageView;->getLayoutParams()Landroid/view/ViewGroup$LayoutParams;
@@ -4618,15 +4587,15 @@
 
     check-cast p1, Landroid/widget/LinearLayout$LayoutParams;
 
-    .line 934
-    sget v0, Lcn/kuwo/base/utils/DeviceInfo;->WIDTH:I
+    .line 893
+    sget v0, Lcn/kuwo/base/utils/j;->f:I
 
     add-int/lit8 v0, v0, -0x32
 
     iput v0, p1, Landroid/widget/LinearLayout$LayoutParams;->width:I
 
-    .line 935
-    sget v0, Lcn/kuwo/base/utils/DeviceInfo;->WIDTH:I
+    .line 894
+    sget v0, Lcn/kuwo/base/utils/j;->f:I
 
     add-int/lit8 v0, v0, -0x32
 
@@ -4636,23 +4605,23 @@
 
     iput v0, p1, Landroid/widget/LinearLayout$LayoutParams;->height:I
 
-    .line 936
+    .line 895
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->tagView:Landroid/widget/ImageView;
 
     invoke-virtual {v0, p1}, Landroid/widget/ImageView;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V
 
     goto :goto_70
 
-    .line 939
+    .line 898
     :cond_63
     iput-boolean v1, p0, Lcn/kuwo/ui/fragment/MainController;->isShowingCarGuide:Z
 
     const/16 p1, 0x8
 
-    .line 940
+    .line 899
     invoke-virtual {v0, p1}, Landroid/view/View;->setVisibility(I)V
 
-    .line 941
+    .line 900
     iget-object p1, p0, Lcn/kuwo/ui/fragment/MainController;->tagView:Landroid/widget/ImageView;
 
     const/4 v0, 0x0
@@ -4667,8 +4636,8 @@
 .method public showRightView()V
     .registers 3
 
-    .line 1525
-    invoke-static {}, Lcn/kuwo/base/utils/DeviceInfo;->isFoldStates()Z
+    .line 1498
+    invoke-static {}, Lcn/kuwo/base/utils/j;->p()Z
 
     move-result v0
 
@@ -4684,31 +4653,31 @@
 
     if-ne v0, v1, :cond_2c
 
-    .line 1526
+    .line 1499
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->rightFragment:Landroid/widget/FrameLayout;
 
     const/4 v1, 0x0
 
     invoke-virtual {v0, v1}, Landroid/widget/FrameLayout;->setVisibility(I)V
 
-    .line 1527
+    .line 1500
     iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->rlLeft:Landroid/widget/RelativeLayout;
 
     invoke-virtual {v0}, Landroid/widget/RelativeLayout;->getLayoutParams()Landroid/view/ViewGroup$LayoutParams;
 
     move-result-object v0
 
-    .line 1528
-    sget v1, Lcn/kuwo/base/utils/DeviceInfo;->WIDTH:I
+    .line 1501
+    sget v1, Lcn/kuwo/base/utils/j;->f:I
 
     iput v1, v0, Landroid/view/ViewGroup$LayoutParams;->width:I
 
-    .line 1529
+    .line 1502
     iget-object v1, p0, Lcn/kuwo/ui/fragment/MainController;->rlLeft:Landroid/widget/RelativeLayout;
 
     invoke-virtual {v1, v0}, Landroid/widget/RelativeLayout;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V
 
-    .line 1530
+    .line 1503
     invoke-static {}, Lcn/kuwo/ui/fragment/RightFragmentController;->getInstance()Lcn/kuwo/ui/fragment/RightFragmentController;
 
     move-result-object v0
@@ -4716,18 +4685,5 @@
     invoke-virtual {v0}, Lcn/kuwo/ui/fragment/RightFragmentController;->loadFragment()V
 
     :cond_2c
-    return-void
-.end method
-
-.method public showTranslateBgView()V
-    .registers 3
-
-    .line 1174
-    iget-object v0, p0, Lcn/kuwo/ui/fragment/MainController;->mTranslateBgView:Landroid/view/View;
-
-    const/4 v1, 0x0
-
-    invoke-virtual {v0, v1}, Landroid/view/View;->setVisibility(I)V
-
     return-void
 .end method
